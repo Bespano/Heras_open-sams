@@ -1,9 +1,11 @@
 <link href="<?php echo base_url('assets/css/bootstrap.css');?>" rel="stylesheet">
 <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
 
-<h2><?php echo $title; ?></h2>
+
 
 <div class="container">
+<h2><?php echo $title; ?></h2>
+
 
 
 </br>
@@ -11,6 +13,10 @@
 </br>
 
 <div style="margin-left:30%;margin-top:20px;" >
+
+
+
+
 
 <div class="form-group">
 <label for="employeeno" class="control-label">Employee No :</label> <input type="text" name="name" class="form-control" />
