@@ -43,14 +43,7 @@
 
   <div class="page-header">
     <h2>Registro de Actividad</h2>
-  </div>
-   <?php echo $success; if (isset($success)){ ?>
-    
-    <div class="alert alert-success" role="alert">
-      <strong>Correcto</strong> <?php   echo (isset($success)) ? $success : "";?>
-  </div>
-  <?php 
-  }else{echo "no success";}?>
+
  
   
  <a href="activity/create"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
