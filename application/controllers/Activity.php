@@ -18,26 +18,45 @@ class Activity extends CI_Controller {
 			$this->load->view('footer.php', $this->viewdata);
 		}
 
-		public function index()
+		public function index($data = null)
 		{
+			$success=$data['success'];
 			$data = array(
 				'page_title' => 'Actividad',
 				'activity' => $this->activity_model->get_activity(),
-				'title'=> 'Actividad'
+				'title'=> 'Actividad',
+				'success'=>$success
 			);
 
 
 			$this->_render_page('activity/index.php', $data);
 		}
 
+		
+		public function create()
+		{
+			$this->load->helper('form');
+			$this->load->library('form_validation');
 
+			$data['title'] = 'Nueva Actividad';
 
+			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');
+			$this->form_validation->set_rules('activity_category', 'Categoría', 'required');
+			$this->form_validation->set_rules('activity_group', 'Grupo', 'required');
 
-   
-
-
-
-
+			if ($this->form_validation->run() === FALSE)
+			{
+				// if person does not fill in correct info, they get resubmitted back to the form.             
+            	
+				$this->_render_page('activity/create', $data);
+			}
+			else
+			{
+				$this->activity_model->set_activity();
+				$data['success'] = "La actividad se ha registrado con éxito.";
+				redirect('activity', $data);
+			}
+		}
 
 
 
@@ -56,31 +75,5 @@ class Activity extends CI_Controller {
 				$this->load->view('news/view', $data);
 				$this->load->view('templates/footer');
         }
-		
-		public function create()
-		{
-			$this->load->helper('form');
-			$this->load->library('form_validation');
 
-			$data['title'] = 'Nueva Actividad';
-
-			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');
-			$this->form_validation->set_rules('activity_category', 'Categoría', 'required');
-			$this->form_validation->set_rules('activity_group', 'Grupo', 'required');
-
-			if ($this->form_validation->run() === FALSE)
-			{
-				//$this->load->view('templates/header', $data);
-				$this->_render_page('activity/create', $data);
-				//$this->load->view('activity/create');
-				//$this->load->view('templates/footer');
-				echo "form_validation";
-
-			}
-			else
-			{
-				$this->activity_model->set_activity();
-				$this->load->view('activity/index');
-			}
-		}
 }

@@ -44,7 +44,16 @@
   <div class="page-header">
     <h2>Registro de Actividad</h2>
   </div>
- <a href="create"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
+   <?php echo $success; if (isset($success)){ ?>
+    
+    <div class="alert alert-success" role="alert">
+      <strong>Correcto</strong> <?php   echo (isset($success)) ? $success : "";?>
+  </div>
+  <?php 
+  }else{echo "no success";}?>
+ 
+  
+ <a href="activity/create"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
   <div class="row">
     <div class="col-md-12">
       <table class="table table-bordered">
@@ -61,7 +70,6 @@
         </thead>
         <tbody>
 		
-        <?php //print_r($activity); ?>
     	<?php foreach ($activity as $activity_item): ?>
 				
 	        <tr>
