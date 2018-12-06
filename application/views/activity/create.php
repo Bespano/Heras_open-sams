@@ -40,13 +40,6 @@
     <p>Asistencia Social Hermandad Macarena</p>
   </div>
 
-
- 
-
-
-
-
-
   <div class="page-header">
     <h2>Nueva actividad</h2>
   </div>
@@ -69,9 +62,9 @@
     <label for="activity_description_label">Descripción</label>
     <input type="input" name="activity_description" /><br />
     <label for="activity_category_label">Categoría</label>
-    <input type="input" name="activity_category" /><br />
+    <?php $category_options= $categories; echo form_dropdown('activity_category',$category_options); ?><br />
     <label for="activity_group_label">Grupo</label>
-    <input type="input" name="activity_group" /><br />
+    <?php $groups_options= $groups; echo form_dropdown('activity_group',$groups_options); ?><br />
     <label for="activity_amount_label">Cantidad</label>
     <input type="input" name="activity_amount" /><br />
 

@@ -13,6 +13,36 @@ class Activity_model extends CI_Model {
                 $query = $this->db->get();
                 return $query->result_array();
         }
+
+        public function get_categories()
+        {
+                
+                 $result = $this -> db -> select('idCategory, Category') -> get('categories') -> result_array(); 
+ 
+                $categories=array();
+                $categories[''] = 'Elija categoría...'; 
+                foreach($result as $r){
+                        $categories[$r['idCategory']] = $r['Category']; 
+                
+                }
+                
+                return $categories;
+        }
+
+        public function get_groups()
+        {
+                
+                 $result = $this -> db -> select('idGroup, Groups') -> get('groups') -> result_array(); 
+ 
+                $groups=array();
+                $groups[''] = 'Elija grupo...'; 
+                foreach($result as $r){
+                        $groups[$r['idGroup']] = $r['Groups']; 
+                
+                }
+                
+                return $groups;
+        }
         
         public function set_activity()
         {

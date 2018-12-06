@@ -37,8 +37,13 @@ class Activity extends CI_Controller {
 		{
 			$this->load->helper('form');
 			$this->load->library('form_validation');
+			
 
-			$data['title'] = 'Nueva Actividad';
+			$data = array(
+				'title' => 'Nueva Actividad',
+				'categories' => $this->activity_model->get_categories(),
+				'groups' => $this->activity_model->get_groups()
+			);
 
 			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');
 			$this->form_validation->set_rules('activity_category', 'Categoría', 'required');
