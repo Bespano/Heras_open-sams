@@ -1,4 +1,4 @@
-# Social Assitency data management system
+# Web application for Social Assitance Management System (SAMS)
 
 
 
