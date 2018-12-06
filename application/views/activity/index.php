@@ -76,8 +76,8 @@
 	            <td><?php echo $activity_item['idActivity']; ?></td>
 	            <td><?php echo date("d/m/Y", strtotime($activity_item['activity_date'])); ?></td>
 	            <td><?php echo $activity_item['activity_description']; ?></td>
-	            <td><?php echo $activity_item['activity_category']; ?></td>
-	            <td><?php echo $activity_item['activity_group']; ?></td>
+	            <td><?php echo $activity_item['Category']; ?></td>
+	            <td><?php echo $activity_item['Groups']; ?></td>
 	            <td><?php echo $activity_item['activity_amount']; ?> €</td>
 	            <td>  	   
 				    <button type="button" class="btn btn-primary">Ver</button>

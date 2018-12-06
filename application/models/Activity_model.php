@@ -8,7 +8,9 @@ class Activity_model extends CI_Model {
 		
 	public function get_activity()
         {
-                $query = $this->db->get('activity');
+                //$query = $this->db->get('activity');
+                 $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("groups","activity.activity_group=groups.idGroup");
+                $query = $this->db->get();
                 return $query->result_array();
         }
         
