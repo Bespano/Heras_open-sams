@@ -45,6 +45,18 @@
 
   <div class="page-header">
     <h2>Registro de Actividad</h2>
+  </div>
+   <?php echo $success; 
+    if (isset($success)){ ?>
+    
+        <div class="alert alert-success" role="alert">
+          <strong>Correcto</strong> <?php   echo (isset($success)) ? $success : "";?>
+      </div>
+  <?php       
+    }else{?>
+      <div class="alert alert-info" role="alert"> "Sin cambios"</div>
+      
+   <?php }?>
 
  
   <div class="row">

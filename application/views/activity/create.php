@@ -65,8 +65,8 @@
     <input type="input" name="activity_description" /><br />
     <label for="activity_category_label">Categoría</label>
     <?php $category_options= $categories; echo form_dropdown('activity_category',$category_options); ?><br />
-    <label for="activity_group_label">Grupo</label>
-    <?php $groups_options= $groups; echo form_dropdown('activity_group',$groups_options); ?><br />
+    <label for="activity_subcategory_label">Subcategoría</label>
+    <?php $subcategories_options= $subcategories; echo form_dropdown('activity_subcategory',$subcategories_options); ?><br />
     <label for="activity_amount_label">Cantidad</label>
     <input type="input" name="activity_amount" /><br />
 
