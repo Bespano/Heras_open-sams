@@ -42,12 +42,12 @@ class Activity extends CI_Controller {
 			$data = array(
 				'title' => 'Nueva Actividad',
 				'categories' => $this->activity_model->get_categories(),
-				'groups' => $this->activity_model->get_groups()
+				'subcategories' => $this->activity_model->get_subcategories()
 			);
 
 			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');
 			$this->form_validation->set_rules('activity_category', 'Categoría', 'required');
-			$this->form_validation->set_rules('activity_group', 'Grupo', 'required');
+			$this->form_validation->set_rules('activity_subcategory', 'Subcategoría', 'required');
 
 			if ($this->form_validation->run() === FALSE)
 			{

@@ -9,7 +9,7 @@ class Activity_model extends CI_Model {
 	public function get_activity()
         {
                 //$query = $this->db->get('activity');
-                 $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("groups","activity.activity_group=groups.idGroup");
+                 $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idGroup");
                 $query = $this->db->get();
                 return $query->result_array();
         }
@@ -29,10 +29,10 @@ class Activity_model extends CI_Model {
                 return $categories;
         }
 
-        public function get_groups()
+        public function get_subcategories()
         {
                 
-                 $result = $this -> db -> select('idGroup, Groups') -> get('groups') -> result_array(); 
+                 $result = $this -> db -> select('idGroup, Groups') -> get('subcategories') -> result_array(); 
  
                 $groups=array();
                 $groups[''] = 'Elija grupo...'; 
@@ -51,7 +51,7 @@ class Activity_model extends CI_Model {
                         'activity_date' => $this->input->post('activity_date'),
                         'activity_description' => $this->input->post('activity_description'),
                         'activity_category' => $this->input->post('activity_category'),
-                        'activity_group' => $this->input->post('activity_group'),
+                        'activity_subcategory' => $this->input->post('activity_subcategory'),
                         'activity_amount' => $this->input->post('activity_amount'),
                 );
 
