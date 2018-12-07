@@ -1,16 +1,16 @@
 <?php
-class Activity_model extends CI_Model {
+class Volunteers_model extends CI_Model {
 
         public function __construct()
         {
                 $this->load->database();
         }
 		
-	public function get_activity()
+	public function get_volunteers()
         {
-                //$query = $this->db->get('activity');
-                 $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("groups","activity.activity_group=groups.idGroup");
-                $query = $this->db->get();
+                $query = $this->db->get('volunteers');
+                //  $this->db->select("*")->from("volunteers")->join("categories", "activity.activity_category = categories.idCategory")->join("groups","activity.activity_group=groups.idGroup");
+                // $query = $this->db->get();
                 return $query->result_array();
         }
 
@@ -57,11 +57,6 @@ class Activity_model extends CI_Model {
 
                 return $this->db->insert('activity', $data);
 
-        }
-
-        public function del_activity($id)
-        {
-                $this->db->delete('activity', array('idActivity' => $id));  // Produces: // DELETE FROM mytable  // WHERE id = $id
         }
 
         }

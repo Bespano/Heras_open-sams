@@ -1,10 +1,10 @@
 <?php
-class Activity extends CI_Controller {
+class Volunteers extends CI_Controller {
 
         public function __construct()
         {
                 parent::__construct();
-                $this->load->model('activity_model');
+                $this->load->model('volunteers_model');
                 $this->load->helper('url_helper');
         }
 
@@ -20,14 +20,16 @@ class Activity extends CI_Controller {
 
 		public function index($data = null)
 		{
+			$success=$data['success'];
 			$data = array(
-				'page_title' => 'Actividad',
-				'activity' => $this->activity_model->get_activity(),
-				'title'=> 'Actividad',
+				'page_title' => 'Voluntarios',
+				'volunteers' => $this->volunteers_model->get_volunteers(),
+				'title'=> 'Voluntarios',
+				'success'=>$success
 			);
 
 
-			$this->_render_page('activity/index.php', $data);
+			$this->_render_page('volunteers/index.php', $data);
 		}
 
 		
@@ -62,11 +64,7 @@ class Activity extends CI_Controller {
 		}
 
 
-		public function delete($data = null){
-			$this->activity_model->del_activity($data);
-			$data['success'] = "La actividad se ha borrado con éxito.";
-			redirect('activity', $data);
-		}
+
 
         public function view($slug = NULL)
         {

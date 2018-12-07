@@ -51,6 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'index';
 $route['activity/(:any)'] = 'activity/$1';
-//$route['activity'] = 'activity/index';
+$route['volunteers/(:any)'] = 'volunteers/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

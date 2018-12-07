@@ -8,21 +8,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index">Asistencia Social</a>
+      <a class="navbar-brand" href="#">Bootstrap theme</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li ><a href="../index">Inicio</a></li>
-        <li class="active"><a href="../activity">Actividad</a></li>
-        <li><a href="../volunteers">Voluntarios</a></li>
-        <li><a href="../pantry">Despensa</a></li>
-        
+        <li ><a href="index">Inicio</a></li>
+        <li class="active"><a href="activity">Actividad</a></li>
+        <li><a href="#contact">Contact</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Áreas <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Salud</a></li>
-            <li><a href="#">Educación</a></li>
-            <li><a href="#">Carcelario</a></li>
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Nav header</li>
             <li><a href="#">Separated link</a></li>
@@ -39,7 +37,7 @@
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <h1>Registro de Actividad</h1>
-    <p>Asistencia Social</p>
+    <p>Asistencia Social Hermandad Macarena</p>
   </div>
 
   <div class="page-header">
