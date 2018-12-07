@@ -59,4 +59,9 @@ class Activity_model extends CI_Model {
 
         }
 
+        public function del_activity($id)
+        {
+                $this->db->delete('activity', array('idActivity' => $id));  // Produces: // DELETE FROM mytable  // WHERE id = $id
+        }
+
         }

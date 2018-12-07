@@ -54,8 +54,15 @@
   <?php 
   }else{echo "no success";}?>
  
-  
- <a href="activity/create"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
+  <div class="row">
+      <div class="pull-right">
+          <a href="activity/create"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
+      </div>
+</div>
+ 
+ <div class="row">
+    </br>
+ </div>
   <div class="row">
     <div class="col-md-12">
       <table class="table table-bordered">
@@ -84,7 +91,9 @@
 	            <td>  	   
 				    <button type="button" class="btn btn-primary">Ver</button>
 				    <button type="button" class="btn btn-warning">Editar</button>
-				    <button type="button" class="btn btn-danger">Borrar</button>
+				
+            
+            <?php $onclick = array('onclick'=>"return confirm('Confirmar borrado de la actividad nº ".$activity_item['idActivity']." ?')");?> <?=anchor('activity/delete/'.$activity_item['idActivity'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
 				</td>
 
 	        </tr>
@@ -96,17 +105,6 @@
       </table>
     </div> <!-- class="col-nav 6" -->
     
-  </div>
-
-
-  
-
-</div>
-
-
-
-
-
 </div>
 
 

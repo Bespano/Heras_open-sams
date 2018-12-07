@@ -64,7 +64,11 @@ class Activity extends CI_Controller {
 		}
 
 
-
+		public function delete($data = null){
+			$this->activity_model->del_activity($data);
+			$data['success'] = "La actividad se ha borrado con éxito.";
+			redirect('activity', $data);
+		}
 
         public function view($slug = NULL)
         {
