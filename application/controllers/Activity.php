@@ -24,6 +24,7 @@ class Activity extends CI_Controller {
 				'page_title' => 'Actividad',
 				'activity' => $this->activity_model->get_activity(),
 				'title'=> 'Actividad',
+				'success'=> ''
 			);
 
 
