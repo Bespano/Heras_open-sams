@@ -14,6 +14,12 @@ class Activity_model extends CI_Model {
                 return $query->result_array();
         }
 
+    public function get_activity_WhereLike($field, $search)
+        {
+            $query = $this->db->like($field, $search)->order_by('activity_date')->get('activity');
+            return $query->result();
+        }
+
         public function get_categories()
         {
                 

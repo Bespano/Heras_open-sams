@@ -20,12 +20,22 @@ class Activity extends CI_Controller {
 
 		public function index($data = null)
 		{
+			$filter = $this->input->post('filter');
+        	$field  = $this->input->post('field');
+        	$search = $this->input->post('search');
 			$data = array(
 				'page_title' => 'Actividad',
-				'activity' => $this->activity_model->get_activity(),
 				'title'=> 'Actividad',
 				'success'=> ''
 			);
+
+			
+
+        if (isset($filter) && !empty($search)) {         
+            $data['activity'] = $this->activity_model->get_activity_WhereLike($field, $search);
+        } else {            
+            $data['activity'] = $this->activity_model->get_activity();
+        }
 
 
 			$this->_render_page('activity/index.php', $data);

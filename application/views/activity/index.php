@@ -61,7 +61,17 @@
  
   <div class="row">
       <div class="pull-right">
-          <a href="activity/create"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
+          <form class="form-inline" action="<?php echo base_url() . 'activity'; ?>" method="post">
+            <select class="form-control" name="field">
+                <option selected="selected" disabled="disabled" value="">Filtrar por</option>
+                <option value="activity_category">Categoría</option>
+                <option value="activity_subcategory">Subcategoría</option>
+                <option value="activity_date">Mes</option>
+            </select>
+            <input class="form-control" type="text" name="search" value="" placeholder="Buscar...">
+            <input class="btn btn-default" type="submit" name="filter" value="Ir">
+            <a href="activity/create"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
+          </form>
       </div>
 </div>
  
