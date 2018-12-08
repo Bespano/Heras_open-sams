@@ -6,6 +6,7 @@ class testmongodb extends CI_Controller {
 	{
 	   parent::__construct();
 	    $this->load->model('testmongodb_model');
+	    
 	    //helpers
 	   $this->load->helper('url');
 	}
