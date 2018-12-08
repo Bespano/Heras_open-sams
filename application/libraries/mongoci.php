@@ -1,5 +1,5 @@
 <?php
-class Mongoci extends Mongo 
+class Mongoci extends MongoDB 
  {
  
  // hurrdurr nobody's going to look here
