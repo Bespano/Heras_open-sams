@@ -74,14 +74,38 @@ class Volunteers extends CI_Controller {
             $this->load->helper('form');
 			$this->load->library('form_validation');
             $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
+		   
 		    if (empty($data['volunteer_item']))
 			{
 				show_404();
 			}	
 
+			$this->form_validation->set_rules('volunteer_firstname', 'Volunteer First name', 'required');
 			//$data['title'] = $data['volunteer_item']['idVolunteer'];
+ 			if ($this->form_validation->run() === FALSE)
+			{
+				// if person does not fill in correct info, they get resubmitted back to the form.             
+            	echo "<br>";
+				echo "<br>";
+				echo "<br>";
+				echo "Pito <br>";
+				print_r($data);
+				$this->_render_page('volunteers/edit_volunteer.php', $data);
 
-			$this->_render_page('volunteers/edit_volunteer.php', $data);
+			}
+			else
+			{
+				$idVolunteer=$data['idVolunteer'];
+				echo "<br>";
+				echo "<br>";
+				echo "<br>";
+				echo "Pito 2 <br>";
+				print_r($data);
+				$this->volunteers_model->update_volunteer($idVolunteer);
+				$data['success'] = "El voluntario/a se ha modificado con éxito.";
+				redirect('volunteers', $data);
+			}
+			
         }
 
 }

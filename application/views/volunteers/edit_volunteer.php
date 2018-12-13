@@ -55,14 +55,14 @@
         <div class="panel-body">
           
  
-
-
-<?php echo form_open('volunteers/edit_volunteer'); ?>
+<?php foreach ($volunteer_item as $volunteer_data): ?>
+<?php echo validation_errors(); ?>
+<?php  echo $volunteer_data['volunteer_firstname'];  echo form_open('volunteers/edit_volunteer/'.$volunteer_data['idVolunteer'].''); ?>
 
     <label for="volunteer_date_label">Fecha de nacimiento</label>
-    <input type="input" name="volunteer_birthdate" value="<?php echo set_value('volunteer_birthdate'); ?>" /><br />
+    <input type="input" name="volunteer_birthdate" value="<?php echo set_value('volunteer_birthdate',$volunteer_data['volunteer_birthdate']); ?>" /><br />
     <label for="volunteer_firstname_label">Nombre</label>
-    <input type="input" name="volunteer_firstname" /><br />
+    <input type="input" name="volunteer_firstname" value="<?php echo set_value('volunteer_firstname',$volunteer_data['volunteer_firstname']); ?>" /><br />
     <label for="volunteer_name_label">Apellidos</label>
     <input type="input" name="volunteer_lastname" /><br />
     <label for="volunteer_email_label">Email</label>
@@ -80,10 +80,10 @@
     <label for="volunteer_experience_label">Experiencia</label>
     <textarea name="volunteer_experience" rows="10" cols="50"></textarea><br />
 
-  
+  <?php endforeach; ?>
 
 
-    <input type="submit" name="submit" value="Create volunteer" class="btn btn-primary"/>
+    <input type="submit" name="submit" value="Edit volunteer" class="btn btn-primary"/>
 
 </form>
 
