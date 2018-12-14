@@ -97,4 +97,19 @@ class Volunteers extends CI_Controller {
 			
         }
 
+
+        public function view_volunteer($idVolunteer = NULL)
+        {
+            $this->load->helper('form');
+			$this->load->library('form_validation');
+            $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
+		   
+		    if (empty($data['volunteer_item']))
+			{
+				show_404();
+			}	
+		
+			$this->_render_page('volunteers/view_volunteer.php', $data);			
+        }
+
 }

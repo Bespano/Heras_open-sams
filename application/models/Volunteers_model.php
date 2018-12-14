@@ -14,35 +14,6 @@ class Volunteers_model extends CI_Model {
                 return $query->result_array();
         }
 
-        public function get_categories()
-        {
-                
-                 $result = $this -> db -> select('idCategory, Category') -> get('categories') -> result_array(); 
- 
-                $categories=array();
-                $categories[''] = 'Elija categoría...'; 
-                foreach($result as $r){
-                        $categories[$r['idCategory']] = $r['Category']; 
-                
-                }
-                
-                return $categories;
-        }
-
-        public function get_groups()
-        {
-                
-                 $result = $this -> db -> select('idGroup, Groups') -> get('groups') -> result_array(); 
- 
-                $groups=array();
-                $groups[''] = 'Elija grupo...'; 
-                foreach($result as $r){
-                        $groups[$r['idGroup']] = $r['Groups']; 
-                
-                }
-                
-                return $groups;
-        }
         
         public function set_volunteer()
         {
@@ -72,9 +43,7 @@ class Volunteers_model extends CI_Model {
         {
                               
                 $query = $this->db->get_where('volunteers', array('idVolunteer' => $idVolunteer));
-                //  $this->db->select("*")->from("volunteers")->join("categories", "activity.activity_category = categories.idCategory")->join("groups","activity.activity_group=groups.idGroup");
-                // $query = $this->db->get();
-                print_r($query->result_array());
+                //print_r($query->result_array());
                 return $query->result_array();
         }
 

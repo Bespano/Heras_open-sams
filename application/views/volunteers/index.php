@@ -73,8 +73,7 @@
             <th>Fecha de nacimiento</th>
             <th>Teléfono</th>
             <th>Email</th>
-            <th>Profesión</th>
-            <th>Ocupación</th>
+
             <th>ACCIONES</th>
           </tr>
         </thead>
@@ -90,12 +89,13 @@
               <td><?php echo date("d/m/Y", strtotime($volunteer_item['volunteer_birthdate'])); ?></td>
 	            <td><?php echo $volunteer_item['volunteer_phone']; ?></td>
               <td><?php echo $volunteer_item['volunteer_email']; ?></td>
-              <td><?php echo $volunteer_item['volunteer_profession']; ?></td>
-              <td><?php echo $volunteer_item['volunteer_occupation']; ?></td>  
+            
 	            <td>  	   
-				    <button type="button" class="btn btn-primary">Ver</button>
-				    <?php $onclick = array('onclick'=>"return confirm('Desea editar el voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/edit_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-warning">Editar</button>',$onclick);?>
-				    <?php $onclick = array('onclick'=>"return confirm('Desea borrar del voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/delete/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
+				    <?php /*View button*/ echo anchor('volunteers/view_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-primary">Ver</button>');?>
+				   
+            <?php /*Edit button*/ echo anchor('volunteers/edit_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-warning">Editar</button>');?>
+				   
+            <?php /*Delete button*/ $onclick = array('onclick'=>"return confirm('Desea borrar del voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/delete/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
 				</td>
 
 	        </tr>

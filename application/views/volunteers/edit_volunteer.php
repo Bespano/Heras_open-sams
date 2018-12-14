@@ -12,10 +12,10 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li ><a href="index">Inicio</a></li>
-        <li ><a href="activity">Actividad</a></li>
-        <li class="active"><a href="volunteers">Voluntarios</a></li>
-        <li><a href="pantry">Despensa</a></li>
+        <li ><a href="../index">Inicio</a></li>
+        <li ><a href="../activity">Actividad</a></li>
+        <li class="active"><a href="../../volunteers">Voluntarios</a></li>
+        <li><a href="../pantry">Despensa</a></li>
         
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Áreas <span class="caret"></span></a>
@@ -60,13 +60,13 @@
 <?php echo form_open('volunteers/edit_volunteer/'.$volunteer_data['idVolunteer'].''); ?>
     <input type="hidden" name="idVolunteer" value="<?php echo set_value('idVolunteer',$volunteer_data['idVolunteer']); ?>" />
     <label for="volunteer_date_label">Fecha de nacimiento</label>
-    <input type="input" name="volunteer_birthdate" value="<?php echo set_value('volunteer_birthdate',$volunteer_data['volunteer_birthdate']); ?>" /><br />
+    <input type="input" name="volunteer_birthdate" placeholder="Introduzca la fecha de nacimiento AAAA/MM/DD" value="<?php echo set_value('volunteer_birthdate',$volunteer_data['volunteer_birthdate']); ?>" /><br />
     <label for="volunteer_firstname_label">Nombre</label>
     <input type="input" name="volunteer_firstname" value="<?php echo set_value('volunteer_firstname',$volunteer_data['volunteer_firstname']); ?>" /><br />
     <label for="volunteer_name_label">Apellidos</label>
     <input type="input" name="volunteer_lastname"  value="<?php echo set_value('volunteer_lastname',$volunteer_data['volunteer_lastname']); ?>" /><br />
     <label for="volunteer_email_label">Email</label>
-    <input type="input" name="volunteer_email" value="<?php echo set_value('volunteer_email',$volunteer_data['volunteer_email']); ?>"/><br />
+    <input type="email" name="volunteer_email" value="<?php echo set_value('volunteer_email',$volunteer_data['volunteer_email']); ?>"/><br />
     <label for="volunteer_phone_label">Teléfono</label>
     <input type="input" name="volunteer_phone" value="<?php echo set_value('volunteer_phone',$volunteer_data['volunteer_phone']); ?>"/><br />
     <label for="volunteer_profession_label">Profesión</label>
@@ -76,9 +76,9 @@
     <label for="volunteer_availability_label">Disponibilidad</label>
     <input type="input" name="volunteer_availability" value="<?php echo set_value('volunteer_availability',$volunteer_data['volunteer_availability']); ?>" /><br />
     <label for="volunteer_occupation_label">Preferencias</label>
-    <input type="input" name="volunteer_occupation" /><br />
+    <input type="input" name="volunteer_preferences" /><br />
     <label for="volunteer_experience_label">Experiencia</label>
-    <textarea name="volunteer_experience" rows="10" cols="50" value="<?php echo set_value('volunteer_experience',$volunteer_data['volunteer_experience']); ?>"></textarea><br />
+    <textarea name="volunteer_experience" rows="10" cols="50"><?php echo set_value('volunteer_experience',$volunteer_data['volunteer_experience']); ?></textarea><br />
 
   <?php endforeach; ?>
 
