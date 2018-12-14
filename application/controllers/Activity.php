@@ -31,7 +31,7 @@ class Activity extends CI_Controller {
 
 			
 
-        if (isset($filter) && !empty($search)) {         
+        if (!empty($search)) {         
             $data['activity'] = $this->activity_model->get_activity_WhereLike($field, $search);
         } else {            
             $data['activity'] = $this->activity_model->get_activity();

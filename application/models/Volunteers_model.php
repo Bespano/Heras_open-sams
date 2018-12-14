@@ -28,6 +28,7 @@ class Volunteers_model extends CI_Model {
                         'volunteer_profession' => $this->input->post('volunteer_profession'),
                         'volunteer_availability' => $this->input->post('volunteer_availability'),
                         'volunteer_experience' => $this->input->post('volunteer_experience'),
+                        
                 );
 
                 return $this->db->insert('volunteers', $data);

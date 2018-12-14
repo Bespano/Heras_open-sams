@@ -16,8 +16,9 @@ class Activity_model extends CI_Model {
 
     public function get_activity_WhereLike($field, $search)
         {
-            $query = $this->db->like($field, $search)->order_by('activity_date')->get('activity');
-            return $query->result();
+            $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idGroup")->like('activity_description', $search)->order_by('activity_date');
+            $query = $this->db->get();
+            return $query->result_array();
         }
 
         public function get_categories()

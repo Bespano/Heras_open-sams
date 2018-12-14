@@ -58,6 +58,8 @@
 <?php foreach ($volunteer_item as $volunteer_data): ?>
 <?php echo form_open('volunteers/edit_volunteer/'.$volunteer_data['idVolunteer'].''); ?>
     <input type="hidden" name="idVolunteer" value="<?php echo set_value('idVolunteer',$volunteer_data['idVolunteer']); ?>" />
+    <?php echo "Creado el :".$volunteer_data['volunteer_creationdate'] ?><br />
+    <?php echo "Modificado por última vez el ".$volunteer_data['volunteer_lastmodificationdate'] ?><br />
     <label for="volunteer_date_label">Fecha de nacimiento</label>
     <input type="input" name="volunteer_birthdate" value="<?php echo set_value('volunteer_birthdate',$volunteer_data['volunteer_birthdate']); ?>" readonly/><br />
     <label for="volunteer_firstname_label">Nombre</label>

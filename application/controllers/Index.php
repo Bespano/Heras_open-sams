@@ -5,6 +5,7 @@ class Index extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->library('session');
 	}
 		
 	private function _render_page($view, $data = null)
@@ -19,9 +20,14 @@ class Index extends CI_Controller {
 	public function index()
 	{
 		$data = array(
-			'page_title' => 'Asistencia Social Hermandad Macarena'
+			'page_title' => 'Asistencia Social'
 		);
-
+		// set array of items in session
+        $arraydata = array(
+                'Project_name'  => 'SAMS Social Assistance Management System',
+                'version' => 'Alpha version',
+        );
+        $this->session->set_userdata($arraydata);
 		$this->_render_page('index.php', $data);
 	}
 }

@@ -6,11 +6,13 @@ class Volunteers extends CI_Controller {
                 parent::__construct();
                 $this->load->model('volunteers_model');
                 $this->load->helper('url_helper');
+                $this->load->library('session');
         }
 
 
 		private function _render_page($view, $data = null)
 		{
+
 			$this->viewdata = (empty($data)) ? $this->data : $data;
 
 			$this->load->view('header.php', $this->viewdata);
@@ -18,17 +20,28 @@ class Volunteers extends CI_Controller {
 			$this->load->view('footer.php', $this->viewdata);
 		}
 
-		public function index($data = null)
+		public function index($data =null)
 		{
-			$success=$data['success'];
+
+			
+$msg=$data['info_message'];
+echo $data['info_message'];
+
 			$data = array(
 				'page_title' => 'Voluntarios',
 				'volunteers' => $this->volunteers_model->get_volunteers(),
 				'title'=> 'Voluntarios',
-				'success'=>$success
+				'info_message_view' => $msg,
 			);
+			
 
+			
 
+			 /*$arraydata = array(
+                'Project_name'  => 'SAMS Social Assistance Management System',
+                'version' => 'Alpha version',
+	        );
+	        $this->session->set_userdata($arraydata);*/
 			$this->_render_page('volunteers/index.php', $data);
 		}
 
@@ -57,14 +70,14 @@ class Volunteers extends CI_Controller {
 			else
 			{
 				$this->volunteers_model->set_volunteer();
-				$data['success'] = "El voluntario/a se ha registrado con éxito.";
+//				$data['success'] = "El voluntario/a se ha registrado con éxito.";
 				redirect('volunteers', $data);
 			}
 		}
 
 		public function delete($data = null){
 			$this->volunteers_model->del_volunteer($data);
-			$data['success'] = "El voluntario se ha borrado con éxito.";
+			//$data['success'] = "El voluntario se ha borrado con éxito.";
 			redirect('volunteers', $data);
 		}
 
@@ -73,6 +86,8 @@ class Volunteers extends CI_Controller {
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
+            $this->load->library('session');			
+            
             $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
 		   
 		    if (empty($data['volunteer_item']))
@@ -91,7 +106,8 @@ class Volunteers extends CI_Controller {
 			else
 			{
 				$this->volunteers_model->update_volunteer($idVolunteer,$data);
-				$data['success'] = "El voluntario/a se ha modificado con éxito.";
+				$this->session->set_flashdata('info_message', 'El voluntario/a se ha modificado con éxito.');
+				$data['info_message']=$this->session->flashdata('info_message');
 				redirect('volunteers', $data);
 			}
 			

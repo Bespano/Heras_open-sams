@@ -46,13 +46,18 @@
   <div class="page-header">
     <h2>Listado de voluntarios</h2>
   </div>
-   <?php echo $success; if (isset($success)){ ?>
-    
-    <div class="alert alert-success" role="alert">
-      <strong>Correcto</strong> <?php   echo (isset($success)) ? $success : "";?>
-  </div>
-  <?php 
-  }else{echo "no success";}?>
+   <?php 
+
+   if($info_message_view)  
+  {   ?>
+      <div class="alert alert-success" role="alert">
+        <strong>Correcto</strong> <?php echo $info_message_view; ?>
+      </div>
+      <?php 
+  }else
+  {
+    echo "no info_message";
+  }?>
  
   
  <div class="pull-right">
@@ -65,7 +70,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-bordered">
+      <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
             <th>Nº</th>
