@@ -94,8 +94,8 @@
               <td><?php echo $volunteer_item['volunteer_occupation']; ?></td>  
 	            <td>  	   
 				    <button type="button" class="btn btn-primary">Ver</button>
-				    <?php $onclick = array('onclick'=>"return confirm('Confirmar borrado del voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/edit_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-warning">Editar</button>',$onclick);?>
-				    <?php $onclick = array('onclick'=>"return confirm('Confirmar borrado del voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/delete/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
+				    <?php $onclick = array('onclick'=>"return confirm('Desea editar el voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/edit_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-warning">Editar</button>',$onclick);?>
+				    <?php $onclick = array('onclick'=>"return confirm('Desea borrar del voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/delete/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
 				</td>
 
 	        </tr>

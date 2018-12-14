@@ -74,24 +74,24 @@ class Volunteers_model extends CI_Model {
                 $query = $this->db->get_where('volunteers', array('idVolunteer' => $idVolunteer));
                 //  $this->db->select("*")->from("volunteers")->join("categories", "activity.activity_category = categories.idCategory")->join("groups","activity.activity_group=groups.idGroup");
                 // $query = $this->db->get();
+                print_r($query->result_array());
                 return $query->result_array();
         }
 
-    public function update_volunteer($idVolunteer)
+    public function update_volunteer($idVolunteer,$data)
         {
                               
                 $data = array(
                         'volunteer_birthdate' => $this->input->post('volunteer_birthdate'),
                         'volunteer_firstname' => $this->input->post('volunteer_firstname'),
-                        /*'volunteer_lastname' => $this->input->post('volunteer_lastname'),
+                        'volunteer_lastname' => $this->input->post('volunteer_lastname'),
                         'volunteer_email' => $this->input->post('volunteer_email'),
                         'volunteer_phone' => $this->input->post('volunteer_phone'),
                         'volunteer_occupation' => $this->input->post('volunteer_occupation'),
                         'volunteer_profession' => $this->input->post('volunteer_profession'),
                         'volunteer_availability' => $this->input->post('volunteer_availability'),
-                        'volunteer_experience' => $this->input->post('volunteer_experience'),*/
+                        'volunteer_experience' => $this->input->post('volunteer_experience'),
                 );
-print_r("desde el modelo ".$data);
                 $this->db->where('idVolunteer', $idVolunteer);
                 return $this->db->update('volunteers', $data);
 
