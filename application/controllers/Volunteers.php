@@ -6,11 +6,13 @@ class Volunteers extends CI_Controller {
                 parent::__construct();
                 $this->load->model('volunteers_model');
                 $this->load->helper('url_helper');
+                $this->load->library('session');
         }
 
 
 		private function _render_page($view, $data = null)
 		{
+
 			$this->viewdata = (empty($data)) ? $this->data : $data;
 
 			$this->load->view('header.php', $this->viewdata);
@@ -18,67 +20,112 @@ class Volunteers extends CI_Controller {
 			$this->load->view('footer.php', $this->viewdata);
 		}
 
-		public function index($data = null)
+		public function index($data =null)
 		{
-			$success=$data['success'];
+
+			
+$msg=$data['info_message'];
+echo $data['info_message'];
+
 			$data = array(
 				'page_title' => 'Voluntarios',
 				'volunteers' => $this->volunteers_model->get_volunteers(),
 				'title'=> 'Voluntarios',
-				'success'=>$success
+				'info_message_view' => $msg,
 			);
+			
 
+			
 
+			 /*$arraydata = array(
+                'Project_name'  => 'SAMS Social Assistance Management System',
+                'version' => 'Alpha version',
+	        );
+	        $this->session->set_userdata($arraydata);*/
 			$this->_render_page('volunteers/index.php', $data);
 		}
 
 		
-		public function create()
+		public function insert_volunteer()
 		{
 			$this->load->helper('form');
 			$this->load->library('form_validation');
 			
 
 			$data = array(
-				'title' => 'Nueva Actividad',
-				'categories' => $this->activity_model->get_categories(),
-				'groups' => $this->activity_model->get_groups()
+				'title' => 'Nuevo Voluntario/a',
+				//'preferences' => $this->volunteers_model->get_preferences(),
+				//'groups' => $this->volunteers_model->get_groups()
 			);
 
-			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');
-			$this->form_validation->set_rules('activity_category', 'Categoría', 'required');
-			$this->form_validation->set_rules('activity_group', 'Grupo', 'required');
+			$this->form_validation->set_rules('volunteer_phone', 'Volunteer phone', 'required');
+			$this->form_validation->set_rules('volunteer_email', 'Volunteer email', 'required');
 
 			if ($this->form_validation->run() === FALSE)
 			{
 				// if person does not fill in correct info, they get resubmitted back to the form.             
             	
-				$this->_render_page('activity/create', $data);
+				$this->_render_page('volunteers/insert_volunteer', $data);
 			}
 			else
 			{
-				$this->activity_model->set_activity();
-				$data['success'] = "La actividad se ha registrado con éxito.";
-				redirect('activity', $data);
+				$this->volunteers_model->set_volunteer();
+//				$data['success'] = "El voluntario/a se ha registrado con éxito.";
+				redirect('volunteers', $data);
 			}
 		}
 
+		public function delete($data = null){
+			$this->volunteers_model->del_volunteer($data);
+			//$data['success'] = "El voluntario se ha borrado con éxito.";
+			redirect('volunteers', $data);
+		}
 
 
-
-        public function view($slug = NULL)
+        public function edit_volunteer($idVolunteer = NULL)
         {
-                $data['news_item'] = $this->news_model->get_news($slug);
-				        if (empty($data['news_item']))
-						{
-							show_404();
-						}	
+            $this->load->helper('form');
+			$this->load->library('form_validation');
+            $this->load->library('session');			
+            
+            $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
+		   
+		    if (empty($data['volunteer_item']))
+			{
+				show_404();
+			}	
 
-				$data['title'] = $data['news_item']['title'];
+			$this->form_validation->set_rules('volunteer_firstname', 'Volunteer First name', 'required');
+			//$data['title'] = $data['volunteer_item']['idVolunteer'];
+ 			if ($this->form_validation->run() === FALSE)
+			{
+				// if person does not fill in correct info, they get resubmitted back to the form.             
+				$this->_render_page('volunteers/edit_volunteer.php', $data);
 
-				$this->load->view('templates/header', $data);
-				$this->load->view('news/view', $data);
-				$this->load->view('templates/footer');
+			}
+			else
+			{
+				$this->volunteers_model->update_volunteer($idVolunteer,$data);
+				$this->session->set_flashdata('info_message', 'El voluntario/a se ha modificado con éxito.');
+				$data['info_message']=$this->session->flashdata('info_message');
+				redirect('volunteers', $data);
+			}
+			
+        }
+
+
+        public function view_volunteer($idVolunteer = NULL)
+        {
+            $this->load->helper('form');
+			$this->load->library('form_validation');
+            $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
+		   
+		    if (empty($data['volunteer_item']))
+			{
+				show_404();
+			}	
+		
+			$this->_render_page('volunteers/view_volunteer.php', $data);			
         }
 
 }

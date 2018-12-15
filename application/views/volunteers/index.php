@@ -46,25 +46,40 @@
   <div class="page-header">
     <h2>Listado de voluntarios</h2>
   </div>
-   <?php echo $success; if (isset($success)){ ?>
-    
-    <div class="alert alert-success" role="alert">
-      <strong>Correcto</strong> <?php   echo (isset($success)) ? $success : "";?>
-  </div>
-  <?php 
-  }else{echo "no success";}?>
+   <?php 
+
+   if($info_message_view)  
+  {   ?>
+      <div class="alert alert-success" role="alert">
+        <strong>Correcto</strong> <?php echo $info_message_view; ?>
+      </div>
+      <?php 
+  }else
+  {
+    echo "no info_message";
+  }?>
  
   
- <a href="activity/create"><button type="button" class="btn btn-primary">Nuevo Voluntario</button></a>
+ <div class="pull-right">
+    <a href="volunteers/insert_volunteer"><button type="button" class="btn btn-primary">Nuevo Voluntario</button></a>
+  </div>
+
+<div class="row">
+    </br>
+ </div>
+
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-bordered">
+      <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
             <th>Nº</th>
             <th>Nombre y Apellidos</th>
-            <th>Concepto</th>
-            
+            <th>Fecha de nacimiento</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+
+            <th>ACCIONES</th>
           </tr>
         </thead>
         <tbody>
@@ -73,14 +88,19 @@
 				
 	        <tr>
 	            <td><?php echo $volunteer_item['idVolunteer']; ?></td>
-	            <td><?php echo date("d/m/Y", strtotime($volunteer_item['activity_date'])); ?></td>
-	            <td><?php echo $volunteer_item['volunteer_name']; ?></td>
-	            <td><?php echo $volunteer_item['volunteer_surname']; ?></td>
-	          
+	            
+	            <td><?php echo $volunteer_item['volunteer_firstname'].' '.$volunteer_item['volunteer_lastname']; ?></td>
+	            
+              <td><?php echo date("d/m/Y", strtotime($volunteer_item['volunteer_birthdate'])); ?></td>
+	            <td><?php echo $volunteer_item['volunteer_phone']; ?></td>
+              <td><?php echo $volunteer_item['volunteer_email']; ?></td>
+            
 	            <td>  	   
-				    <button type="button" class="btn btn-primary">Ver</button>
-				    <button type="button" class="btn btn-warning">Editar</button>
-				    <button type="button" class="btn btn-danger">Borrar</button>
+				    <?php /*View button*/ echo anchor('volunteers/view_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-primary">Ver</button>');?>
+				   
+            <?php /*Edit button*/ echo anchor('volunteers/edit_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-warning">Editar</button>');?>
+				   
+            <?php /*Delete button*/ $onclick = array('onclick'=>"return confirm('Desea borrar del voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/delete/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
 				</td>
 
 	        </tr>
