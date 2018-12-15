@@ -46,7 +46,7 @@
     <h2>Nueva actividad</h2>
   </div>
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-xl-12">
      
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -59,19 +59,37 @@
 
 <?php echo form_open('activity/create'); ?>
 
-    <label for="activity_date_label">Fecha</label>
-    <input type="input" name="activity_date" /><br />
-    <label for="activity_description_label">Descripción</label>
-    <input type="input" name="activity_description" /><br />
-    <label for="activity_category_label">Categoría</label>
-    <?php $category_options= $categories; echo form_dropdown('activity_category',$category_options); ?><br />
-    <label for="activity_subcategory_label">Subcategoría</label>
-    <?php $subcategories_options= $subcategories; echo form_dropdown('activity_subcategory',$subcategories_options); ?><br />
-    <label for="activity_amount_label">Cantidad</label>
-    <input type="input" name="activity_amount" /><br />
+    <div class="form-group row">
+      <div class="col-xs-3">
+        <label for="activity_date_label">Fecha</label>
+        <input class="form-control" type="input" name="activity_date" /><br />
+      </div>
+      <div class="col-xs-6">
+        <label for="activity_description_label">Descripción</label>
+        <input class="form-control" type="input" name="activity_description" /><br />
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <div class="col-xs-3">
+        <label for="activity_category_label">Categoría</label>
+        <?php $category_options= $categories; echo form_dropdown('activity_category',$category_options,'','class="form-control"'); ?><br />
+      </div>
+      <div class="col-xs-3">
+        <label for="activity_subcategory_label">Subcategoría</label>
+        <?php $subcategories_options= $subcategories; echo form_dropdown('activity_subcategory',$subcategories_options,'','class="form-control"'); ?><br />
+      </div>
+     
+      <div class="col-xs-3">  
+        <label for="activity_amount_label">Cantidad</label>
+        <input class="form-control" type="input" name="activity_amount" /><br />
+      </div>
+    </div>  
 
 
-    <input type="submit" name="submit" value="Create news item" class="btn btn-primary"/>
+    <input type="submit" name="submit" value="Guardar" class="btn btn-primary"/> 
+    <?php anchor('activity/index','Volver', '<button type="button" class="btn btn-danger">Volver</button>');?>
+        </td>
 
 </form>
 

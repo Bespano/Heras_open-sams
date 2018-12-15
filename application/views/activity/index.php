@@ -70,7 +70,7 @@
             </select>
             <input class="form-control" type="text" name="search" value="" placeholder="Buscar...">
             <input class="btn btn-default" type="submit" name="filter" value="Ir">
-            <a href="activity/create"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
+            <a href="activity/insert_activity"><button type="button" class="btn btn-primary">Nueva actividad</button></a>
           </form>
       </div>
 </div>
@@ -104,11 +104,11 @@
 	            <td><?php echo $activity_item['Groups']; ?></td>
 	            <td><?php echo $activity_item['activity_amount']; ?> €</td>
 	            <td>  	   
-				    <button type="button" class="btn btn-primary">Ver</button>
-				    <button type="button" class="btn btn-warning">Editar</button>
-				
-            
-            <?php $onclick = array('onclick'=>"return confirm('Confirmar borrado de la actividad nº ".$activity_item['idActivity']." ?')");?> <?=anchor('activity/delete/'.$activity_item['idActivity'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
+            <?php /*View button*/ echo anchor('activity/view_activity/'.$activity_item['idActivity'], '<button type="button" class="btn btn-primary">Ver</button>');?>
+           
+            <?php /*Edit button*/ echo anchor('activity/edit_activity/'.$activity_item['idActivity'], '<button type="button" class="btn btn-warning">Editar</button>');?>
+           
+            <?php /*Delete button*/ $onclick = array('onclick'=>"return confirm('Confirmar borrado de la actividad nº ".$activity_item['idActivity']." ?')");?> <?=anchor('activity/delete/'.$activity_item['idActivity'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
 				</td>
 
 	        </tr>
@@ -125,15 +125,3 @@
 
 
 </div> <!-- /container -->
-
-
-
-
-
-
-
-
-
-
-
-

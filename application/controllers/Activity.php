@@ -42,7 +42,7 @@ class Activity extends CI_Controller {
 		}
 
 		
-		public function create()
+		public function insert_activity()
 		{
 			$this->load->helper('form');
 			$this->load->library('form_validation');
@@ -62,7 +62,7 @@ class Activity extends CI_Controller {
 			{
 				// if person does not fill in correct info, they get resubmitted back to the form.             
             	
-				$this->_render_page('activity/create', $data);
+				$this->_render_page('activity/insert_activity', $data);
 			}
 			else
 			{
@@ -93,5 +93,56 @@ class Activity extends CI_Controller {
 				$this->load->view('news/view', $data);
 				$this->load->view('templates/footer');
         }
+
+        public function edit_activity($idActivity = NULL)
+        {
+            $this->load->helper('form');
+			$this->load->library('form_validation');
+            $this->load->library('session');			
+                      
+		    $data = array(
+				'title' => 'Nueva Actividad',
+				'activity_item' => $this->activity_model->get_activityById($idActivity),
+				'categories' => $this->activity_model->get_categories(),
+				'subcategories' => $this->activity_model->get_subcategories()
+			);
+		    if (empty($data['activity_item']))
+			{
+				show_404();
+			}	
+
+			$this->form_validation->set_rules('activity_description', 'activity description', 'required');
+			//$data['title'] = $data['activity_item']['idactivity'];
+ 			if ($this->form_validation->run() === FALSE)
+			{
+				// if person does not fill in correct info, they get resubmitted back to the form.             
+				$this->_render_page('activity/edit_activity.php', $data);
+
+			}
+			else
+			{
+				$this->activity_model->update_activity($idActivity,$data);
+				$this->session->set_flashdata('info_message', 'El voluntario/a se ha modificado con éxito.');
+				$data['info_message']=$this->session->flashdata('info_message');
+				redirect('activity', $data);
+			}
+			
+        }
+
+
+        public function view_activity($idactivity = NULL)
+        {
+            $this->load->helper('form');
+			$this->load->library('form_validation');
+            $data['activity_item'] = $this->activitys_model->get_activityById($idactivity);
+		   
+		    if (empty($data['activity_item']))
+			{
+				show_404();
+			}	
+		
+			$this->_render_page('activitys/view_activity.php', $data);			
+        }
+
 
 }

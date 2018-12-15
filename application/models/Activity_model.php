@@ -51,7 +51,7 @@ class Activity_model extends CI_Model {
                 return $groups;
         }
         
-        public function set_activity()
+    public function set_activity()
         {
                               
                 $data = array(
@@ -66,9 +66,30 @@ class Activity_model extends CI_Model {
 
         }
 
-        public function del_activity($id)
+    public function del_activity($id)
         {
                 $this->db->delete('activity', array('idActivity' => $id));  // Produces: // DELETE FROM mytable  // WHERE id = $id
         }
 
+    public function get_activityById($idActivity)
+        {                              
+            $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idGroup")->like('IdActivity', $idActivity);
+            $query = $this->db->get();
+            return $query->result_array();
         }
+
+    public function update_activity($idActivity,$data)
+        {
+                              
+                $data = array(
+                        'activity_date' => $this->input->post('activity_date'),
+                        'activity_description' => $this->input->post('activity_description'),
+                        'activity_category' => $this->input->post('activity_category'),
+                        'activity_subcategory' => $this->input->post('activity_subcategory'),
+                        'activity_amount' => $this->input->post('activity_amount'),
+                );
+                $this->db->where('idActivity', $idActivity);
+                return $this->db->update('activity', $data);
+
+        }
+}
