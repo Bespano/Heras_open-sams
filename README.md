@@ -28,6 +28,8 @@ This MVP will have the basic features:
 * Volunteers area.
 * Dashboard area. 
 
+Take a look at our Roadmap Wiki Page to go into the details. 
+
 # Installation
 Clone or download the source code and place it in a folder under your htdocs in your preferred software application service (XAMPP, LAMP, etc.)
 Execute the sql code in order to create the database model. 
