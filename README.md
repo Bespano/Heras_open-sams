@@ -27,3 +27,10 @@ This MVP will have the basic features:
 * Pantry shelf area.
 * Volunteers area.
 * Dashboard area. 
+
+# Installation
+Clone or download the source code and place it in a folder under your htdocs in your preferred software application service (XAMPP, LAMP, etc.)
+Execute the sql code in order to create the database model. 
+Run your application by typing the folder name in your browser. 
+
+
