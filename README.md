@@ -33,4 +33,5 @@ Clone or download the source code and place it in a folder under your htdocs in 
 Execute the sql code in order to create the database model. 
 Run your application by typing the folder name in your browser. 
 
-
+# Contributing
+Please go to the CONTRIBUTING file if you feel like giving us a hand over the code, documentation, UX or just on general feedback. 
