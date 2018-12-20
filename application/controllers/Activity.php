@@ -54,6 +54,7 @@ class Activity extends CI_Controller {
 				'subcategories' => $this->activity_model->get_subcategories()
 			);
 
+			$this->form_validation->set_rules('activity_date', 'Fecha','callback_check_date', 'required');
 			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');
 			$this->form_validation->set_rules('activity_category', 'Categoría', 'required');
 			$this->form_validation->set_rules('activity_subcategory', 'Subcategoría', 'required');
@@ -69,6 +70,19 @@ class Activity extends CI_Controller {
 				$this->activity_model->set_activity();
 				$data['success'] = "La actividad se ha registrado con éxito.";
 				redirect('activity', $data);
+			}
+		}
+
+
+		public function check_date($inputdate)
+		{	
+			if($inputdate)
+			{
+				$this->form_validation->set_message('check_date', 'El campo {field} no puede tener ese formato. Escriba la fecha en formato AAAA/MM/YY')
+				return FALSE; 			
+			}else
+			{
+				return TRUE; 
 			}
 		}
 

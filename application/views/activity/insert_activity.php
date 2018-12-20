@@ -62,27 +62,27 @@
     <div class="form-group row">
       <div class="col-xs-3">
         <label for="activity_date_label">Fecha</label>
-        <input class="form-control" type="input" name="activity_date" /><br />
+        <input class="form-control" type="input" name="activity_date" value="<?php echo set_value('activity_date'); ?>"/><br />
       </div>
       <div class="col-xs-6">
         <label for="activity_description_label">Descripción</label>
-        <input class="form-control" type="input" name="activity_description" /><br />
+        <input class="form-control" type="input" name="activity_description" value="<?php echo set_value('activity_description'); ?>"/><br />
       </div>
     </div>
     
     <div class="form-group row">
       <div class="col-xs-3">
         <label for="activity_category_label">Categoría</label>
-        <?php $category_options= $categories; echo form_dropdown('activity_category',$category_options,'','class="form-control"'); ?><br />
+        <?php $category_options= $categories; $categories_selected=echo set_value('activity_category');  echo form_dropdown('activity_category',$category_options,$categories_selected,'class="form-control"'); ?><br />
       </div>
       <div class="col-xs-3">
         <label for="activity_subcategory_label">Subcategoría</label>
-        <?php $subcategories_options= $subcategories; echo form_dropdown('activity_subcategory',$subcategories_options,'','class="form-control"'); ?><br />
+        <?php $subcategories_options= $subcategories; $subcategories_selected=echo set_value('activity_subcategory'); echo form_dropdown('activity_subcategory',$subcategories_options,$subcategories_selected,'class="form-control"'); ?><br />
       </div>
      
       <div class="col-xs-3">  
         <label for="activity_amount_label">Cantidad</label>
-        <input class="form-control" type="input" name="activity_amount" /><br />
+        <input class="form-control" type="input" name="activity_amount" value="<?php echo set_value('activity_amount'); ?>"/><br />
       </div>
     </div>  
 
