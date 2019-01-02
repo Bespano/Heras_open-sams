@@ -6,7 +6,7 @@ class Activity extends CI_Controller {
                 parent::__construct();
                 $this->load->model('activity_model');
                 $this->load->helper('url_helper');
-                $this->load->library('ion_auth');
+                $this->load->library('Ion_auth');
 			    if (!$this->ion_auth->logged_in())
 			    {
 			      //redirect them to the login page
@@ -77,7 +77,9 @@ class Activity extends CI_Controller {
 			else
 			{
 				$this->activity_model->set_activity();
-				$data['success'] = "La actividad se ha registrado con éxito.";
+
+				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 				redirect('activity', $data);
 			}
 		}
@@ -121,7 +123,7 @@ class Activity extends CI_Controller {
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $this->load->library('session');			
+           		
                       
 		    $data = array(
 				'title' => 'Nueva Actividad',

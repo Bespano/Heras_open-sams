@@ -12,15 +12,12 @@
   <div class="page-header">
     <h2>Registro de Actividad</h2>
   </div>
-   <?php echo $success; 
-    if (isset($success)){ ?>
+   <?php  
+    if (isset($message)){ ?>
     
         <div class="alert alert-success" role="alert">
-          <strong>Correcto</strong> <?php   echo (isset($success)) ? $success : "";?>
+          <div id="infoMessage"><?php echo $message;?></div>
       </div>
-  <?php       
-    }else{?>
-      <div class="alert alert-info" role="alert"> "Sin cambios"</div>
       
    <?php }?>
 

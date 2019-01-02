@@ -20,16 +20,14 @@
       <div class="alert alert-success" role="alert">
         <strong>Correcto</strong> <?php echo $info_message_view; ?>
       </div>
-      <?php 
-  }else
-  {
-    echo "no info_message";
-  }?>
+      <?php  }?>
  
+  <div class="row">
   
  <div class="pull-right">
     <a href="volunteers/insert_volunteer"><button type="button" class="btn btn-primary">Nuevo Voluntario</button></a>
   </div>
+</div>
 
 <div class="row">
     </br>
