@@ -5,7 +5,7 @@ class Index extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-        //$this->load->library('ion_auth');
+        $this->load->library('ion_auth');
 	    if (!$this->ion_auth->logged_in())
 	    {
 	      //redirect them to the login page
@@ -18,6 +18,7 @@ class Index extends CI_Controller {
 		$this->viewdata = (empty($data)) ? $this->data : $data;
 
 		$this->load->view('header.php', $this->viewdata);
+		$this->load->view('main_header.php', $this->viewdata);
 		$this->load->view($view, $this->viewdata);
 		$this->load->view('footer.php', $this->viewdata);
 	}

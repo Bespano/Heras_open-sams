@@ -21,6 +21,7 @@ class Volunteers extends CI_Controller {
 			$this->viewdata = (empty($data)) ? $this->data : $data;
 
 			$this->load->view('header.php', $this->viewdata);
+			$this->load->view('main_header.php', $this->viewdata);
 			$this->load->view($view, $this->viewdata);
 			$this->load->view('footer.php', $this->viewdata);
 		}
