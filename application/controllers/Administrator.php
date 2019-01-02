@@ -32,16 +32,16 @@ class Administrator extends CI_Controller {
 		}
 
 		
-		public function insert_activity()
+		public function insert_categoryy()
 		{
 			$this->load->helper('form');
 			$this->load->library('form_validation');
 			
 
 			$data = array(
-				'title' => 'Nueva Actividad',
-				'categories' => $this->activity_model->get_categories(),
-				'subcategories' => $this->activity_model->get_subcategories()
+				'title' => 'Nueva Categoría',
+				'categories' => $this->administrator_model->get_categories(),
+				'subcategories' => $this->administrator_model->get_subcategories()
 			);
 
 			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');

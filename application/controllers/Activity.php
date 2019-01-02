@@ -78,7 +78,7 @@ class Activity extends CI_Controller {
 		{	
 			if($inputdate)
 			{
-				$this->form_validation->set_message('check_date', 'El campo {field} no puede tener ese formato. Escriba la fecha en formato AAAA/MM/YY')
+				$this->form_validation->set_message('check_date', 'El campo {field} no puede tener ese formato. Escriba la fecha en formato AAAA/MM/YY');
 				return FALSE; 			
 			}else
 			{

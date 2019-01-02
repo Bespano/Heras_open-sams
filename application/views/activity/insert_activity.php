@@ -57,7 +57,7 @@
  
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('activity/create'); ?>
+<?php echo form_open('activity/insert_activity'); ?>
 
     <div class="form-group row">
       <div class="col-xs-3">
@@ -73,11 +73,11 @@
     <div class="form-group row">
       <div class="col-xs-3">
         <label for="activity_category_label">Categoría</label>
-        <?php $category_options= $categories; $categories_selected=echo set_value('activity_category');  echo form_dropdown('activity_category',$category_options,$categories_selected,'class="form-control"'); ?><br />
+        <?php $category_options=$categories; $categories_selected=set_value('activity_category');  echo form_dropdown('activity_category',$category_options,$categories_selected,'class="form-control"'); ?><br />
       </div>
       <div class="col-xs-3">
         <label for="activity_subcategory_label">Subcategoría</label>
-        <?php $subcategories_options= $subcategories; $subcategories_selected=echo set_value('activity_subcategory'); echo form_dropdown('activity_subcategory',$subcategories_options,$subcategories_selected,'class="form-control"'); ?><br />
+        <?php $subcategories_options=$subcategories; $subcategories_selected=set_value('activity_subcategory'); echo form_dropdown('activity_subcategory',$subcategories_options,$subcategories_selected,'class="form-control"'); ?><br />
       </div>
      
       <div class="col-xs-3">  
