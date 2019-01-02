@@ -18,14 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index">Asistencia Social</a>
+      <a class="navbar-brand" href="<?php echo base_url();?>index">Asistencia Social</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li ><a href="index">Inicio</a></li>
-        <li class="active"><a href="activity">Actividad</a></li>
-        <li><a href="volunteers">Voluntarios</a></li>
-        <li><a href="pantry">Despensa</a></li>
+        
+        <li <?php if ($menu_active=='activity') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>activity">Actividad</a></li>
+        <li <?php if ($menu_active=='volunteers') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>volunteers">Voluntarios</a></li>
+        <li <?php if ($menu_active=='pantry') { ?> class="active" <?php }?> ><a href="<?php echo base_url();?>pantry">Despensa</a></li>
         
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Áreas <span class="caret"></span></a>

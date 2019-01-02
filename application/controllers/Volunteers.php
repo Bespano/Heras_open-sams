@@ -38,6 +38,7 @@ echo $data['info_message'];
 				'volunteers' => $this->volunteers_model->get_volunteers(),
 				'title'=> 'Voluntarios',
 				'info_message_view' => $msg,
+				'menu_active'=>'volunteers',
 			);
 			
 
@@ -60,6 +61,8 @@ echo $data['info_message'];
 
 			$data = array(
 				'title' => 'Nuevo Voluntario/a',
+				'menu_active'=>'activity',
+				'menu_active'=>'volunteers',
 				//'preferences' => $this->volunteers_model->get_preferences(),
 				//'groups' => $this->volunteers_model->get_groups()
 			);
@@ -94,7 +97,10 @@ echo $data['info_message'];
 			$this->load->library('form_validation');
             $this->load->library('session');			
             
-            $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
+            $data=array(
+            	'volunteer_item' => $this->volunteers_model->get_volunteerById($idVolunteer),
+            	'menu_active'=>'volunteers',
+        	);
 		   
 		    if (empty($data['volunteer_item']))
 			{
@@ -124,7 +130,10 @@ echo $data['info_message'];
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
+            $data=array(
+            	'volunteer_item' => $this->volunteers_model->get_volunteerById($idVolunteer),
+            	'menu_active'=>'volunteers',
+        	);
 		   
 		    if (empty($data['volunteer_item']))
 			{

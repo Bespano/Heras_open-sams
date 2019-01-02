@@ -33,7 +33,8 @@ class Activity extends CI_Controller {
 			$data = array(
 				'page_title' => 'Actividad',
 				'title'=> 'Actividad',
-				'success'=> ''
+				'success'=> '',
+				'menu_active'=>'activity',
 			);
 
 			
@@ -58,7 +59,8 @@ class Activity extends CI_Controller {
 			$data = array(
 				'title' => 'Nueva Actividad',
 				'categories' => $this->activity_model->get_categories(),
-				'subcategories' => $this->activity_model->get_subcategories()
+				'subcategories' => $this->activity_model->get_subcategories(),
+				'menu_active'=>'activity',
 			);
 
 			$this->form_validation->set_rules('activity_date', 'Fecha','callback_check_date', 'required');
@@ -125,7 +127,8 @@ class Activity extends CI_Controller {
 				'title' => 'Nueva Actividad',
 				'activity_item' => $this->activity_model->get_activityById($idActivity),
 				'categories' => $this->activity_model->get_categories(),
-				'subcategories' => $this->activity_model->get_subcategories()
+				'subcategories' => $this->activity_model->get_subcategories(),
+				'menu_active'=>'activity',
 			);
 		    if (empty($data['activity_item']))
 			{
@@ -155,7 +158,10 @@ class Activity extends CI_Controller {
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $data['activity_item'] = $this->activitys_model->get_activityById($idactivity);
+            $data=array(
+            	'activity_item' => $this->activitys_model->get_activityById($idactivity),
+            	'menu_active'=>'activity',
+            );
 		   
 		    if (empty($data['activity_item']))
 			{

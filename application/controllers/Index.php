@@ -26,12 +26,14 @@ class Index extends CI_Controller {
 	public function index()
 	{
 		$data = array(
-			'page_title' => 'Asistencia Social'
+			'page_title' => 'Asistencia Social',
+			'menu_active' => 'Inicio',
 		);
 		// set array of items in session
         $arraydata = array(
                 'Project_name'  => 'SAMS Social Assistance Management System',
                 'version' => 'Alpha version',
+
         );
         $this->session->set_userdata($arraydata);
 		$this->_render_page('index.php', $data);
