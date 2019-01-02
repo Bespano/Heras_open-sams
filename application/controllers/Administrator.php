@@ -6,6 +6,12 @@ class Administrator extends CI_Controller {
                 parent::__construct();
                 $this->load->model('administrator_model');
                 $this->load->helper('url_helper');
+                $this->load->library('ion_auth');
+			    if (!$this->ion_auth->logged_in())
+			    {
+			      //redirect them to the login page
+			      redirect('Auth/login', 'refresh');
+			    }
         }
 
 

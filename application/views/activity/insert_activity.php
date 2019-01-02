@@ -62,7 +62,7 @@
     <div class="form-group row">
       <div class="col-xs-3">
         <label for="activity_date_label">Fecha</label>
-        <input class="form-control" type="input" name="activity_date" value="<?php echo set_value('activity_date'); ?>"/><br />
+        <input class="form-control" type="input" name="activity_date" placeholder="AAAA/MM/DD" value="<?php echo set_value('activity_date'); ?>"/><br />
       </div>
       <div class="col-xs-6">
         <label for="activity_description_label">Descripción</label>

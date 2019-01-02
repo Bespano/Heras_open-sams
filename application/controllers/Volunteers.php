@@ -6,7 +6,12 @@ class Volunteers extends CI_Controller {
                 parent::__construct();
                 $this->load->model('volunteers_model');
                 $this->load->helper('url_helper');
-                $this->load->library('session');
+                $this->load->library('ion_auth');
+			    if (!$this->ion_auth->logged_in())
+			    {
+			      //redirect them to the login page
+			      redirect('Auth/login', 'refresh');
+			    }
         }
 
 

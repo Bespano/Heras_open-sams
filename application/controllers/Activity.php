@@ -6,6 +6,12 @@ class Activity extends CI_Controller {
                 parent::__construct();
                 $this->load->model('activity_model');
                 $this->load->helper('url_helper');
+                $this->load->library('ion_auth');
+			    if (!$this->ion_auth->logged_in())
+			    {
+			      //redirect them to the login page
+			      redirect('Auth/login', 'refresh');
+			    }
         }
 
 
@@ -76,7 +82,7 @@ class Activity extends CI_Controller {
 
 		public function check_date($inputdate)
 		{	
-			if($inputdate)
+			if(!$inputdate)
 			{
 				$this->form_validation->set_message('check_date', 'El campo {field} no puede tener ese formato. Escriba la fecha en formato AAAA/MM/YY');
 				return FALSE; 			
