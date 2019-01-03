@@ -106,7 +106,7 @@ class Auth extends CI_Controller
 				'type' => 'password',
 			];
 
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'login', $this->data);
+			$this->_render_page('auth' . DIRECTORY_SEPARATOR .'login', $this->data);
 		}
 	}
 

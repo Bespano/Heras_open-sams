@@ -5,48 +5,44 @@
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
-    <h1>Voluntarios</h1>
+    <h1>Actividad</h1>
     <p>Asistencia Social</p>
   </div>
 
   <div class="page-header">
-    <h2>Ver voluntario/a</h2>
+    <h2>Ver actividad</h2>
   </div>
   <div class="row">
     <div class="col-sm-6">
      
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Ver voluntario/a</h3>
+          <h3 class="panel-title">Ver actividad</h3>
         </div>
         <div class="panel-body">
           
- 
-<?php foreach ($volunteer_item as $volunteer_data): ?>
-<?php echo form_open('volunteers/edit_volunteer/'.$volunteer_data['idVolunteer'].''); ?>
-    <input type="hidden" name="idVolunteer" value="<?php echo set_value('idVolunteer',$volunteer_data['idVolunteer']); ?>" />
-    <?php echo "Creado el :".$volunteer_data['volunteer_creationdate'] ?><br />
-    <?php echo "Modificado por última vez el ".$volunteer_data['volunteer_lastmodificationdate'] ?><br />
-    <label for="volunteer_date_label">Fecha de nacimiento</label>
-    <input type="input" name="volunteer_birthdate" value="<?php echo set_value('volunteer_birthdate',$volunteer_data['volunteer_birthdate']); ?>" readonly/><br />
-    <label for="volunteer_firstname_label">Nombre</label>
-    <input type="input" name="volunteer_firstname" value="<?php echo set_value('volunteer_firstname',$volunteer_data['volunteer_firstname']); ?>"  readonly readonly/><br />
-    <label for="volunteer_name_label">Apellidos</label>
-    <input type="input" name="volunteer_lastname"  value="<?php echo set_value('volunteer_lastname',$volunteer_data['volunteer_lastname']); ?>" /><br />
-    <label for="volunteer_email_label">Email</label>
-    <input type="input" name="volunteer_email" value="<?php echo set_value('volunteer_email',$volunteer_data['volunteer_email']); ?>" readonly/><br />
-    <label for="volunteer_phone_label">Teléfono</label>
-    <input type="input" name="volunteer_phone" value="<?php echo set_value('volunteer_phone',$volunteer_data['volunteer_phone']); ?>"  readonly/><br />
-    <label for="volunteer_profession_label">Profesión</label>
-    <input type="input" name="volunteer_profession" value="<?php echo set_value('volunteer_profession',$volunteer_data['volunteer_profession']); ?>"  readonly/><br />
-    <label for="volunteer_occupation_label">Ocupación</label>
-    <input type="input" name="volunteer_occupation" value="<?php echo set_value('volunteer_occupation',$volunteer_data['volunteer_occupation']); ?>"  readonly/><br />
-    <label for="volunteer_availability_label">Disponibilidad</label>
-    <input type="input" name="volunteer_availability" value="<?php echo set_value('volunteer_availability',$volunteer_data['volunteer_availability']); ?>"  readonly/><br />
-    <label for="volunteer_occupation_label">Preferencias</label>
-    <input type="input" name="volunteer_occupation"  readonly/><br />
-    <label for="volunteer_experience_label">Experiencia</label>
-    <textarea name="volunteer_experience" rows="10" cols="50"  readonly><?php echo set_value('volunteer_experience',$volunteer_data['volunteer_experience']); ?></textarea><br />
+
+<?php foreach ($activity_item as $activity_data): ?>
+<?php echo form_open('activity/edit_activity/'.$activity_data['idActivity'].''); ?>
+ <form>
+    <input type="hidden" name="idactivity" value="<?php echo set_value('idactivity',$activity_data['idActivity']); ?>" />
+    <p class="text-muted"><?php echo "Creado el :".$activity_data['activity_creationdate'] ?></p>
+    <p class="text-muted"><?php echo "Modificado por última vez el ".$activity_data['activity_lastmodificationdate'] ?></p>
+    <label for="activity_date_label">Fecha</label>
+    <input type="input" class="form-control" name="activity_date" value="<?php echo set_value('activity_date',$activity_data['activity_date']); ?>" readonly/><br />
+    <label for="activity_description">Descripción</label>
+    <input type="input" class="form-control" name="activity_description" value="<?php echo set_value('activity_description',$activity_data['activity_description']); ?>"  readonly readonly/><br />
+    
+    <label for="activity_category_label">Categoría</label>
+    <?php $category_options= $categories; echo form_dropdown('activity_category',$category_options, $activity_data['activity_category'],'class="form-control"', 'disabled=disabled'); ?> <br />
+    
+    <label for="activity_subcategory_label">Subcategoría</label>
+    <?php $subcategory_options= $subcategories;echo form_dropdown('activity_subcategory',$subcategory_options,$activity_data['activity_subcategory'],'class="form-control"', 'disabled=disabled'); ?> <br />
+    
+    <label for="activity_amount">Cantidad</label>
+    <input type="input" class="form-control" name="activity_amount" value="<?php echo set_value('activity_amount',$activity_data['activity_amount']); ?>"  readonly readonly/><br />
+    <a href="<?php echo base_url(); ?>activity"><button type="button" class="btn btn-primary">Volver</button></a>
+    
 
   <?php endforeach; ?>
 
@@ -58,11 +54,6 @@
         </div>
       </div>
     </div><!-- /.col-sm-4 -->
-    
-
-
-  
-
-
+    </div>
 </div> <!-- /container -->
 

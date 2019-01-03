@@ -1,10 +1,10 @@
 <?php
-class Administrator extends CI_Controller {
+class Administration extends CI_Controller {
 
         public function __construct()
         {
                 parent::__construct();
-                $this->load->model('administrator_model');
+                $this->load->model('administration_model');
                 $this->load->helper('url_helper');
                 $this->load->library('ion_auth');
 			    if (!$this->ion_auth->logged_in())
@@ -27,19 +27,22 @@ class Administrator extends CI_Controller {
 
 		public function index($data = null)
 		{
+			$this->load->helper('form');
+			$this->load->library('form_validation');
 
 			$data = array(
 				'page_title' => 'Administrador',
 				'title'=> 'Administrador',
-				'success'=> ''
+				'menu_active'=> 'administration'
 			);
 
-			$data['category'] = $this->administrator_model->get_categories();
-			$this->_render_page('administrator/index.php', $data);
+			$data['category'] = $this->administration_model->get_categories();
+			$data['subcategory'] = $this->administration_model->get_subcategories();
+			$this->_render_page('administration/index.php', $data);
 		}
 
 		
-		public function insert_categoryy()
+		public function insert_category()
 		{
 			$this->load->helper('form');
 			$this->load->library('form_validation');
@@ -47,25 +50,25 @@ class Administrator extends CI_Controller {
 
 			$data = array(
 				'title' => 'Nueva Categoría',
-				'categories' => $this->administrator_model->get_categories(),
-				'subcategories' => $this->administrator_model->get_subcategories()
+				'menu_active'=> 'administration',
+				'categories' => $this->administration_model->get_categories(),
 			);
 
-			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');
-			$this->form_validation->set_rules('activity_category', 'Categoría', 'required');
-			$this->form_validation->set_rules('activity_subcategory', 'Subcategoría', 'required');
+
+			$this->form_validation->set_rules('category', 'Categoría', 'required');
+	
 
 			if ($this->form_validation->run() === FALSE)
 			{
 				// if person does not fill in correct info, they get resubmitted back to the form.             
             	
-				$this->_render_page('activity/insert_activity', $data);
+				$this->_render_page('administration/insert_category', $data);
 			}
 			else
 			{
-				$this->activity_model->set_activity();
-				$data['success'] = "La actividad se ha registrado con éxito.";
-				redirect('activity', $data);
+				$this->administration_model->set_category();
+				$data['success'] = "La categoría se ha registrado con éxito.";
+				redirect('administration', $data);
 			}
 		}
 
@@ -76,20 +79,7 @@ class Administrator extends CI_Controller {
 			redirect('activity', $data);
 		}
 
-        public function view($slug = NULL)
-        {
-                $data['news_item'] = $this->news_model->get_news($slug);
-				        if (empty($data['news_item']))
-						{
-							show_404();
-						}	
-
-				$data['title'] = $data['news_item']['title'];
-
-				$this->load->view('templates/header', $data);
-				$this->load->view('news/view', $data);
-				$this->load->view('templates/footer');
-        }
+     
 
         public function edit_activity($idActivity = NULL)
         {

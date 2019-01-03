@@ -95,7 +95,7 @@ echo $data['info_message'];
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $this->load->library('session');			
+			
             
             $data=array(
             	'volunteer_item' => $this->volunteers_model->get_volunteerById($idVolunteer),
@@ -107,7 +107,7 @@ echo $data['info_message'];
 				show_404();
 			}	
 
-			$this->form_validation->set_rules('volunteer_firstname', 'Volunteer First name', 'required');
+			//$this->form_validation->set_rules('volunteer_firstname', 'Volunteer First name', 'required');
 			//$data['title'] = $data['volunteer_item']['idVolunteer'];
  			if ($this->form_validation->run() === FALSE)
 			{

@@ -22,49 +22,49 @@
         <div class="panel-body">
           
  
-<?php foreach ($activity_item as $activity_data): ?>
-<?php echo validation_errors(); ?>
-<?php echo form_open('activity/edit_activity/'.$activity_data['idActivity'].''); ?>
-    <input type="hidden" name="idActivity" value="<?php echo set_value('idActivity',$activity_data['idActivity']); ?>" />
-    
-    <div class="form-group row">
-      <div class="col-xs-3">
-        <label for="activity_date_label">Fecha</label>
-        <input class="form-control" type="input" name="activity_date" placeholder="" value="<?php echo set_value('activity_date',$activity_data['activity_date']); ?>" />
-      </div>
+          <?php foreach ($activity_item as $activity_data): ?>
+          <?php echo validation_errors(); ?>
+          <?php echo form_open('activity/edit_activity/'.$activity_data['idActivity'].''); ?>
+            <form>
+              <input type="hidden" name="idActivity" value="<?php echo set_value('idActivity',$activity_data['idActivity']); ?>" />
+              <p class="text-muted"><?php echo "Creado el ".$activity_data['activity_creationdate'] ?></p>
+              <p class="text-muted"><?php echo "Modificado por última vez el ".$activity_data['activity_lastmodificationdate'] ?></p>
+              <div class="form-group row">
+                <div class="col-xs-3">
+                  <label for="activity_date_label">Fecha</label>
+                  <input class="form-control" type="input" name="activity_date" placeholder="" value="<?php echo set_value('activity_date',$activity_data['activity_date']); ?>" />
+                </div>
 
-      <div class="col-xs-6">  
-        <label for="activity_description_label">Descripción</label>
-        <input class="form-control" id="ex3" type="input" name="activity_description" value="<?php echo set_value('activity_description',$activity_data['activity_description']); ?>" />
-      </div>
-    </div>  
-    <div class="form-group row">
-      <div class="col-xs-3">
-        <label for="activity_category_label">Categoría</label>
-        <?php $category_options= $categories; echo form_dropdown('activity_category',$category_options,$activity_data['activity_category'],'class="form-control"'); ?><br />
-        
-      </div>
-      <div class="col-xs-3">
-        <label for="activity_subcategory_label">Subcategoría</label>
-        <?php $category_options= $subcategories; echo form_dropdown('activity_subcategory',$category_options,$activity_data['activity_subcategory'],'class="form-control"'); ?><br />
-      </div>
+                <div class="col-xs-6">  
+                  <label for="activity_description_label">Descripción</label>
+                  <input class="form-control" id="ex3" type="input" name="activity_description" value="<?php echo set_value('activity_description',$activity_data['activity_description']); ?>" />
+                </div>
+              </div>  
+              <div class="form-group row">
+                <div class="col-xs-3">
+                  <label for="activity_category_label">Categoría</label>
+                  <?php $category_options= $categories; echo form_dropdown('activity_category',$category_options,$activity_data['activity_category'],'class="form-control"'); ?><br />
+                  
+                </div>
+                <div class="col-xs-3">
+                  <label for="activity_subcategory_label">Subcategoría</label>
+                  <?php $category_options= $subcategories; echo form_dropdown('activity_subcategory',$category_options,$activity_data['activity_subcategory'],'class="form-control"'); ?><br />
+                </div>
 
-      <div class="col-xs-3">  
-        <label for="activity_amount_label">Cantidad</label>
-        <input class="form-control" type="input" name="activity_amount" value="<?php echo set_value('activity_amount',$activity_data['activity_amount']); ?>"/>
-      </div>
-    </div>  
-  <?php endforeach; ?>
+                <div class="col-xs-3">  
+                  <label for="activity_amount_label">Cantidad</label>
+                  <input class="form-control" type="input" name="activity_amount" value="<?php echo set_value('activity_amount',$activity_data['activity_amount']); ?>"/>
+                </div>
+              </div>  
+            <?php endforeach; ?>
+                  <input type="submit" name="submit" value="Guardar" class="btn btn-primary"/>
+                  <a href="<?php echo base_url(); ?>activity"><button type="button" class="btn btn-primary">Volver</button></a>
+            </form>
 
-
-        <input type="submit" name="submit" value="Guardar" class="btn btn-primary"/>
-  
-
-</form>
-
-        </div>
-      </div>
-    </div><!-- /.col-sm-4 -->
+        </div><!-- /.panel-body -->
+      </div><!-- /.panel panel-primary -->
+    </div><!-- /.col-xl-12 -->
+  </div><!-- /.row -->
     
 
 

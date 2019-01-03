@@ -104,20 +104,6 @@ class Activity extends CI_Controller {
 			redirect('activity', $data);
 		}
 
-        public function view($slug = NULL)
-        {
-                $data['news_item'] = $this->news_model->get_news($slug);
-				        if (empty($data['news_item']))
-						{
-							show_404();
-						}	
-
-				$data['title'] = $data['news_item']['title'];
-
-				$this->load->view('templates/header', $data);
-				$this->load->view('news/view', $data);
-				$this->load->view('templates/footer');
-        }
 
         public function edit_activity($idActivity = NULL)
         {
@@ -126,7 +112,7 @@ class Activity extends CI_Controller {
            		
                       
 		    $data = array(
-				'title' => 'Nueva Actividad',
+				'title' => 'Editar una actividad',
 				'activity_item' => $this->activity_model->get_activityById($idActivity),
 				'categories' => $this->activity_model->get_categories(),
 				'subcategories' => $this->activity_model->get_subcategories(),
@@ -161,8 +147,10 @@ class Activity extends CI_Controller {
             $this->load->helper('form');
 			$this->load->library('form_validation');
             $data=array(
-            	'activity_item' => $this->activitys_model->get_activityById($idactivity),
-            	'menu_active'=>'activity',
+            	'activity_item' => $this->activity_model->get_activityById($idactivity),
+            	'categories' => $this->activity_model->get_categories(),
+				'subcategories' => $this->activity_model->get_subcategories(),
+				'menu_active'=>'activity',
             );
 		   
 		    if (empty($data['activity_item']))
@@ -170,7 +158,7 @@ class Activity extends CI_Controller {
 				show_404();
 			}	
 		
-			$this->_render_page('activitys/view_activity.php', $data);			
+			$this->_render_page('activity/view_activity.php', $data);			
         }
 
 

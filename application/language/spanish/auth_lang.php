@@ -24,12 +24,12 @@
 $lang['error_csrf'] = 'Este formulario no pasó nuestras pruebas de seguridad.';
 
 // Login
-$lang['login_heading']         = 'Ingresar';
+$lang['login_heading']         = 'Acceso';
 $lang['login_subheading']      = 'Por favor, introduce tu email/usuario y contraseña.';
 $lang['login_identity_label']  = 'Email/Usuario:';
 $lang['login_password_label']  = 'Contraseña:';
 $lang['login_remember_label']  = 'Recuérdame:';
-$lang['login_submit_btn']      = 'Ingresar';
+$lang['login_submit_btn']      = 'Entrar';
 $lang['login_forgot_password'] = '¿Has olvidado tu contraseña?';
 
 // Index

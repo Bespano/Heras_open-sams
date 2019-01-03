@@ -28,21 +28,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li <?php if ($menu_active=='pantry') { ?> class="active" <?php }?> ><a href="<?php echo base_url();?>pantry">Despensa</a></li>
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Áreas <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administración <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Salud</a></li>
-            <li><a href="#">Educación</a></li>
-            <li><a href="#">Carcelario</a></li>
+            <li<?php if ($menu_active=='administration') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>administration">Categorías y Subcategorías</a></li>
+            <li><a href="#">Usuarios</a></li>
+            <li><a href="#">Módulos</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Nav header</li>
             <li><a href="#">Separated link</a></li>
             <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
-
-
+      </ul>
 <!-- User Account -->
-                            <li class="dropdown user user-menu">
+      <span class="navbar-text pull-center">
+        <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle " data-toggle="dropdown">
                                     
                                     
@@ -68,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </li>
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="<?php echo 'auth/users/profile/id'; ?>"><?php echo 'header_profile'; ?></a>
+                                            
                                         </div>
                                         <div class="pull-right">
                                             <a href="<?php echo site_url('auth/logout'); ?>" ><?php echo 'Log_out'; ?></a>
@@ -78,9 +78,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </li>
 
 
+      </span>
 
 
-      </ul>
+
     </div><!--/.nav-collapse -->
   </div>
 </nav>
