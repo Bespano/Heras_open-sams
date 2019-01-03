@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <ul class="dropdown-menu">
             <li<?php if ($menu_active=='administration') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>administration">Categorías y Subcategorías</a></li>
             <li><a href="#">Usuarios</a></li>
-            <li><a href="#">Módulos</a></li>
+            <li><?php if ($menu_active=='modules') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>modules_list">Módulos</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Nav header</li>
             <li><a href="#">Separated link</a></li>

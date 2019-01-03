@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-01-2019 a las 17:52:09
+-- Tiempo de generación: 03-01-2019 a las 18:57:50
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.2.12
 
@@ -23,16 +23,19 @@ SET time_zone = "+00:00";
 --
 
 DROP TABLE IF EXISTS `activity`;
-CREATE TABLE `activity` (
-  `idActivity` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `activity` (
+  `idActivity` int(11) NOT NULL AUTO_INCREMENT,
   `activity_date` date NOT NULL,
   `activity_description` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
   `activity_category` int(11) NOT NULL,
   `activity_subcategory` int(11) NOT NULL,
   `activity_amount` float NOT NULL,
   `activity_creationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `activity_lastmodificationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Activity log';
+  `activity_lastmodificationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idActivity`),
+  KEY `activity_category` (`activity_category`),
+  KEY `activity_subcategories` (`activity_subcategory`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Activity log';
 
 --
 -- Volcado de datos para la tabla `activity`
@@ -53,8 +56,8 @@ INSERT INTO `activity` (`idActivity`, `activity_date`, `activity_description`, `
 (34, '2018-12-07', 'prueba insert 22222', 2, 2, 2345, '2018-12-14 16:41:31', '2018-12-14 16:41:31'),
 (35, '2018-11-27', '23/18 Expediente Bienvenido Espinosa Cano Agua', 1, 2, 2345, '2018-12-14 16:41:31', '2018-12-14 16:41:31'),
 (36, '2018-11-26', 'Descripción345', 1, 1, 236, '2019-01-02 15:53:05', '2019-01-02 15:53:05'),
-(37, '2018-11-12', 'prueba insert 4', 1, 1, 2345, '2019-01-02 16:42:29', '2019-01-02 16:42:37'),
-(38, '0000-00-00', 'prueba insert 5', 1, 1, 1012, '2019-01-02 16:46:20', '2019-01-02 16:46:20'),
+(37, '2018-11-12', 'prueba insert 4', 1, 4, 2345, '2019-01-02 16:42:29', '2019-01-03 17:45:54'),
+(38, '0000-00-00', 'prueba insert 5', 1, 2, 1012, '2019-01-02 16:46:20', '2019-01-03 17:45:45'),
 (39, '2019-01-04', 'Prueba Go Back button', 1, 1, 2564, '2019-01-02 16:47:00', '2019-01-03 12:48:34'),
 (40, '2018-11-19', 'prueba insert 3456789999', 1, 1, 2564, '2019-01-02 16:48:31', '2019-01-03 13:37:32'),
 (41, '2018-11-27', 'prueba insert 34567890\'', 2, 2, 243569000, '2019-01-02 19:51:46', '2019-01-02 19:51:46'),
@@ -67,19 +70,22 @@ INSERT INTO `activity` (`idActivity`, `activity_date`, `activity_description`, `
 --
 
 DROP TABLE IF EXISTS `categories`;
-CREATE TABLE `categories` (
-  `idCategory` int(11) NOT NULL,
-  `Category` varchar(30) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `idCategory` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `category_creationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `category_lastmodificationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idCategory`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `categories`
 --
 
-INSERT INTO `categories` (`idCategory`, `Category`) VALUES
-(1, 'Hipotecas y alquileres'),
-(2, 'Comunidad y aguas'),
-(3, 'Nueva categoría');
+INSERT INTO `categories` (`idCategory`, `category_name`, `category_creationdate`, `category_lastmodificationdate`) VALUES
+(1, 'Hipotecas y alquileres', '2019-01-03 17:40:01', '2019-01-03 17:40:01'),
+(2, 'Comunidad y aguas', '2019-01-03 17:40:01', '2019-01-03 17:40:01'),
+(4, 'Nueva categoría', '2019-01-03 17:40:01', '2019-01-03 17:40:01');
 
 -- --------------------------------------------------------
 
@@ -88,11 +94,12 @@ INSERT INTO `categories` (`idCategory`, `Category`) VALUES
 --
 
 DROP TABLE IF EXISTS `groups`;
-CREATE TABLE `groups` (
-  `id` mediumint(8) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `description` varchar(100) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `description` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `groups`
@@ -110,12 +117,34 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 --
 
 DROP TABLE IF EXISTS `login_attempts`;
-CREATE TABLE `login_attempts` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `login` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `time` int(11) UNSIGNED DEFAULT NULL
+  `time` int(11) UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `modules`
+--
+
+DROP TABLE IF EXISTS `modules`;
+CREATE TABLE IF NOT EXISTS `modules` (
+  `idModule` int(11) NOT NULL AUTO_INCREMENT,
+  `module_name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`idModule`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `modules`
+--
+
+INSERT INTO `modules` (`idModule`, `module_name`) VALUES
+(1, 'activitiy'),
+(2, 'volunteers');
 
 -- --------------------------------------------------------
 
@@ -124,20 +153,22 @@ CREATE TABLE `login_attempts` (
 --
 
 DROP TABLE IF EXISTS `subcategories`;
-CREATE TABLE `subcategories` (
-  `idSubcategory` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `subcategories` (
+  `idSubcategory` int(11) NOT NULL AUTO_INCREMENT,
   `subcategory` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `subcategory_creationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `subcategory_lastmodificationdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `subcategory_lastmodificationdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idSubcategory`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `subcategories`
 --
 
 INSERT INTO `subcategories` (`idSubcategory`, `subcategory`, `subcategory_creationdate`, `subcategory_lastmodificationdate`) VALUES
-(1, 'Hermanos', '2019-01-03 16:40:06', '0000-00-00 00:00:00'),
-(2, 'Feligreses', '2019-01-03 16:40:06', '0000-00-00 00:00:00');
+(1, 'Hermanos', '2019-01-03 16:40:06', '2019-01-03 17:27:16'),
+(2, 'Feligreses', '2019-01-03 16:40:06', '0000-00-00 00:00:00'),
+(4, 'Nueva subcategoría', '2019-01-03 17:31:06', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -146,8 +177,8 @@ INSERT INTO `subcategories` (`idSubcategory`, `subcategory`, `subcategory_creati
 --
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `username` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
@@ -165,15 +196,20 @@ CREATE TABLE `users` (
   `first_name` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `last_name` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `company` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `phone` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_email` (`email`),
+  UNIQUE KEY `uc_activation_selector` (`activation_selector`),
+  UNIQUE KEY `uc_forgotten_password_selector` (`forgotten_password_selector`),
+  UNIQUE KEY `uc_remember_selector` (`remember_selector`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$v9VVlq1nVjqQeoNbKFqvheUxGIHOkiH.tXO5mJZgWRUKclX.LjUJ6', 'admin@admin.com', NULL, '', NULL, NULL, NULL, '9c528f70e67a5fc2847737ed60ce50e29645c594', '$2y$10$69d1PA0BQYiZfHZqXViV5O1sNcnJSRD1nDFTxtWG6mS7j9.LH51wO', 1268889823, 1546534208, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$12$v9VVlq1nVjqQeoNbKFqvheUxGIHOkiH.tXO5mJZgWRUKclX.LjUJ6', 'admin@admin.com', NULL, '', NULL, NULL, NULL, '9c528f70e67a5fc2847737ed60ce50e29645c594', '$2y$10$69d1PA0BQYiZfHZqXViV5O1sNcnJSRD1nDFTxtWG6mS7j9.LH51wO', 1268889823, 1546538175, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'bienvenido.espinosa@gmail.com', '$2y$10$/BQmNDGDiSjA7pkI7xbVAO7H4SkEI2pngLbOypDJCXj7fJHp3/qeq', 'bienvenido.espinosa@gmail.com', NULL, NULL, '4589da9e5dfbe9958954', '$2y$10$f42qKhylC1uPNrssE1uZfOpqGeStz0PXeWqMV31OiYSJjFIIS72ta', 1546527482, NULL, NULL, 1544856593, NULL, 1, 'Bienvenido', 'Espinosa Cano', 'HM', '686269326');
 
 -- --------------------------------------------------------
@@ -183,11 +219,15 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activ
 --
 
 DROP TABLE IF EXISTS `users_groups`;
-CREATE TABLE `users_groups` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `users_groups` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(11) UNSIGNED NOT NULL,
-  `group_id` mediumint(8) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `group_id` mediumint(8) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
+  KEY `fk_users_groups_users1_idx` (`user_id`),
+  KEY `fk_users_groups_groups1_idx` (`group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `users_groups`
@@ -205,8 +245,8 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 --
 
 DROP TABLE IF EXISTS `volunteers`;
-CREATE TABLE `volunteers` (
-  `idVolunteer` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `volunteers` (
+  `idVolunteer` int(11) NOT NULL AUTO_INCREMENT,
   `volunteer_firstname` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `volunteer_lastname` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `volunteer_email` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
@@ -219,8 +259,9 @@ CREATE TABLE `volunteers` (
   `volunteer_birthdate` date NOT NULL,
   `volunteer_creationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `volunteer_lastmodificationdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `volunteer_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `volunteer_status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idVolunteer`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `volunteers`
@@ -236,119 +277,6 @@ INSERT INTO `volunteers` (`idVolunteer`, `volunteer_firstname`, `volunteer_lastn
 (9, 'José', ' Pérez Pérez', 'jperezp@ppp.com', '686269326', 'profesión', 'Preferencias', '0', 'Disponibilidad', 'Experiencia', '1998-12-14', '2018-12-14 12:46:33', '2018-12-14 15:43:17', 0),
 (10, 'Bienvenido', 'Cano', 'bienvenido.espinosa@gmail.com', '686269326', 'profesión', 'preferencias', '0', 'Disponibilidad', 'experiencia', '1962-12-13', '2019-01-02 18:33:06', '2019-01-02 18:33:06', 0),
 (11, 'Bienvenido', 'Espinosa Cano', 'bienvenido.espinosa@gmail.com', '686269326', 'Profesión', 'Ocupación', 'Preferencias', 'Disponibilidad', 'Experiencia', '2019-01-05', '2019-01-03 13:58:16', '2019-01-03 13:58:16', 0);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `activity`
---
-ALTER TABLE `activity`
-  ADD PRIMARY KEY (`idActivity`),
-  ADD KEY `activity_category` (`activity_category`),
-  ADD KEY `activity_subcategories` (`activity_subcategory`) USING BTREE;
-
---
--- Indices de la tabla `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`idCategory`);
-
---
--- Indices de la tabla `groups`
---
-ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `login_attempts`
---
-ALTER TABLE `login_attempts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `subcategories`
---
-ALTER TABLE `subcategories`
-  ADD PRIMARY KEY (`idSubcategory`);
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uc_email` (`email`),
-  ADD UNIQUE KEY `uc_activation_selector` (`activation_selector`),
-  ADD UNIQUE KEY `uc_forgotten_password_selector` (`forgotten_password_selector`),
-  ADD UNIQUE KEY `uc_remember_selector` (`remember_selector`);
-
---
--- Indices de la tabla `users_groups`
---
-ALTER TABLE `users_groups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
-  ADD KEY `fk_users_groups_users1_idx` (`user_id`),
-  ADD KEY `fk_users_groups_groups1_idx` (`group_id`);
-
---
--- Indices de la tabla `volunteers`
---
-ALTER TABLE `volunteers`
-  ADD PRIMARY KEY (`idVolunteer`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `activity`
---
-ALTER TABLE `activity`
-  MODIFY `idActivity` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
-
---
--- AUTO_INCREMENT de la tabla `categories`
---
-ALTER TABLE `categories`
-  MODIFY `idCategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `groups`
---
-ALTER TABLE `groups`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `login_attempts`
---
-ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `subcategories`
---
-ALTER TABLE `subcategories`
-  MODIFY `idSubcategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `users_groups`
---
-ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `volunteers`
---
-ALTER TABLE `volunteers`
-  MODIFY `idVolunteer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas

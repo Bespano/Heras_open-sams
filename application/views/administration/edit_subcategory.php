@@ -21,17 +21,17 @@
         <div class="panel-body">
           
  
-<?php foreach ($category_item as $category_data): ?>
+<?php foreach ($subcategory_item as $subcategory_data): ?>
 <?php echo validation_errors(); ?>
-<?php echo form_open('administration/edit_category/'.$category_data['idCategory'].''); ?>
+<?php echo form_open('administration/edit_subcategory/'.$subcategory_data['idSubcategory'].''); ?>
     
 <form>
-    <input type="hidden" name="idCategory" value="<?php echo set_value('idCategory',$category_data['idCategory']); ?>" />
+    <input type="hidden" name="idSubcategory" value="<?php echo set_value('idSubcategory',$subcategory_data['idSubcategory']); ?>" />
     
     <div class="form-group row">
       <div class="col-xs-6">  
-        <label for="category_label">Categoría</label>
-        <input class="form-control" id="ex3" type="input" name="category" value="<?php echo set_value('Category',$category_data['Category']); ?>" />
+        <label for="subcategory_label">Categoría</label>
+        <input class="form-control" id="ex3" type="input" name="subcategory" value="<?php echo set_value('subcategory',$subcategory_data['subcategory']); ?>" />
       </div>
     </div>  
     

@@ -41,6 +41,24 @@ class Administration extends CI_Controller {
 			$this->_render_page('administration/index.php', $data);
 		}
 
+
+		public function modules_list($data = null)
+		{
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+
+			$data = array(
+				'page_title' => 'Administrador',
+				'title'=> 'Administrador de Módulos',
+				'menu_active'=> 'administration'
+			);
+
+			$data['modules'] = $this->administration_model->get_modules();
+			
+			$this->_render_page('administration/modules_list.php', $data);
+		}
+
+
 		
 		public function insert_category()
 		{
@@ -51,17 +69,11 @@ class Administration extends CI_Controller {
 			$data = array(
 				'title' => 'Nueva Categoría',
 				'menu_active'=> 'administration',
-				'categories' => $this->administration_model->get_categories(),
 			);
-
-
 			$this->form_validation->set_rules('category', 'Categoría', 'required');
-	
-
 			if ($this->form_validation->run() === FALSE)
 			{
-				// if person does not fill in correct info, they get resubmitted back to the form.             
-            	
+				// if person does not fill in correct info, they get resubmitted back to the form.             	
 				$this->_render_page('administration/insert_category', $data);
 			}
 			else
@@ -72,58 +84,127 @@ class Administration extends CI_Controller {
 			}
 		}
 
+		public function insert_subcategory()
+		{
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+			
 
-		public function delete($data = null){
-			$this->activity_model->del_activity($data);
-			$data['success'] = "La actividad se ha borrado con éxito.";
-			redirect('activity', $data);
+			$data = array(
+				'title' => 'Nueva Subcategoría',
+				'menu_active'=> 'administration',
+			);
+
+
+			$this->form_validation->set_rules('subcategory', 'Subcategoría', 'required');
+	
+
+			if ($this->form_validation->run() === FALSE)
+			{
+				// if person does not fill in correct info, they get resubmitted back to the form.             
+            	
+				$this->_render_page('administration/insert_subcategory', $data);
+			}
+			else
+			{
+				$this->administration_model->set_subcategory();
+				$data['success'] = "La subcategoría se ha registrado con éxito.";
+				redirect('administration', $data);
+			}
+		}
+
+
+		public function delete_category($data = null){
+			$this->administration_model->delete_category($data);
+			$data['success'] = "La categoría se ha borrado con éxito.";
+			redirect('administration', $data);
+		}
+
+		public function delete_subcategory($data = null){
+			$this->administration_model->delete_subcategory($data);
+			$data['success'] = "La subcategoría se ha borrado con éxito.";
+			redirect('administration', $data);
 		}
 
      
 
-        public function edit_activity($idActivity = NULL)
+        public function edit_category($idCategory = NULL)
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $this->load->library('session');			
+		
                       
 		    $data = array(
-				'title' => 'Nueva Actividad',
-				'activity_item' => $this->activity_model->get_activityById($idActivity),
-				'categories' => $this->activity_model->get_categories(),
-				'subcategories' => $this->activity_model->get_subcategories()
+				'title' => 'Editar categoría',
+				'category_item' => $this->administration_model->get_categoryById($idCategory),
+				'menu_active'=> 'administration',
+
 			);
-		    if (empty($data['activity_item']))
+		    if (empty($data['category_item']))
 			{
 				show_404();
 			}	
 
-			$this->form_validation->set_rules('activity_description', 'activity description', 'required');
+			$this->form_validation->set_rules('category', 'category', 'required');
 			//$data['title'] = $data['activity_item']['idactivity'];
  			if ($this->form_validation->run() === FALSE)
 			{
 				// if person does not fill in correct info, they get resubmitted back to the form.             
-				$this->_render_page('activity/edit_activity.php', $data);
+				$this->_render_page('administration/edit_category.php', $data);
 
 			}
 			else
 			{
-				$this->activity_model->update_activity($idActivity,$data);
-				$this->session->set_flashdata('info_message', 'El voluntario/a se ha modificado con éxito.');
+				$this->administration_model->update_category($idCategory,$data);
+				$this->session->set_flashdata('info_message', 'La categoría se ha modificado con éxito.');
 				$data['info_message']=$this->session->flashdata('info_message');
-				redirect('activity', $data);
+				redirect('administration', $data);
 			}
 			
         }
 
-
-        public function view_activity($idactivity = NULL)
+        public function edit_subcategory($idSubcategory = NULL)
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $data['activity_item'] = $this->activitys_model->get_activityById($idactivity);
+		
+                      
+		    $data = array(
+				'title' => 'Editar Subcategoría',
+				'subcategory_item' => $this->administration_model->get_subcategoryById($idSubcategory),
+				'menu_active'=> 'administration',
+
+			);
+		    if (empty($data['subcategory_item']))
+			{
+				show_404();
+			}	
+
+			$this->form_validation->set_rules('subcategory', 'subcategory', 'required');
+			//$data['title'] = $data['activity_item']['idactivity'];
+ 			if ($this->form_validation->run() === FALSE)
+			{
+				// if person does not fill in correct info, they get resubmitted back to the form.             
+				$this->_render_page('administration/edit_subcategory.php', $data);
+
+			}
+			else
+			{
+				$this->administration_model->update_subcategory($idSubcategory,$data);
+				$this->session->set_flashdata('info_message', 'La subcategoría se ha modificado con éxito.');
+				$data['info_message']=$this->session->flashdata('info_message');
+				redirect('administration', $data);
+			}
+			
+        }
+
+        public function view_category($idCategory = NULL)
+        {
+            $this->load->helper('form');
+			$this->load->library('form_validation');
+            $data['category_item'] = $this->administration_model->get_categoryById($idCategory);
 		   
-		    if (empty($data['activity_item']))
+		    if (empty($data['category_item']))
 			{
 				show_404();
 			}	
