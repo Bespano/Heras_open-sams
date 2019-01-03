@@ -42,7 +42,7 @@ class Administration extends CI_Controller {
 		}
 
 
-		public function modules_list($data = null)
+		public function get_modules_list($data = null)
 		{
 			$this->load->helper('form');
 			$this->load->library('form_validation');
@@ -53,7 +53,7 @@ class Administration extends CI_Controller {
 				'menu_active'=> 'administration'
 			);
 
-			$data['modules'] = $this->administration_model->get_modules();
+			$data['module_data'] = $this->administration_model->get_modules();
 			
 			$this->_render_page('administration/modules_list.php', $data);
 		}

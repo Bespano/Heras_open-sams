@@ -8,37 +8,28 @@
     <p>Asistencia Social</p>
   </div>
  
-  <div class="row">
+ 
+<div class="row">
     <div class="col-md-5">
       <div class="page-header">
         <h2>Módulos</h2>
       </div>
       <div class="row">
         <div class="col-sm-4">
-      <div class="list-group">
-        <a href="activity" class="list-group-item active">
-          <h4 class="list-group-item-heading">Modules</h4>
-          <p class="list-group-item-text">Registro de la actividad diaria de la Asistencia Social.</p>
-        </a>
-        <a href="volunteers" class="list-group-item">
-          <h4 class="list-group-item-heading">Voluntarios</h4>
-          <p class="list-group-item-text">Gestión de voluntarios de los diferentes programas de actuación.</p>
-        </a>
-        <a href="pantry" class="list-group-item">
-          <h4 class="list-group-item-heading">Despensa</h4>
-          <p class="list-group-item-text">Gestión de los beneficiarios del programa de Despensa, recepción, entregas y documentación .</p>
-        </a>
-      </div>
-    </div><!-- /.col-sm-4 -->
-      </div>
-    </div> <!-- class="col-nav 6" -->
+    <form>
+    <div class="btn-group" data-toggle="buttons">
+        <?php foreach ($module_data as $module_item): ?>   
+          <?php echo validation_errors(); ?>
+          <?php echo form_open('administration/get_module_status/'); ?>
+              <label class="btn btn-primary <?php if($module_item['module_status']) { ?> active <?php } ?>">
+                <input type="checkbox"><?php echo $module_item['module_name']; ?>
+              </label>
+        <?php endforeach; ?>
+        <input type="submit" name="submit" value="Guardar" class="btn btn-primary"/>
+    </div>
 
-    
-
-
-    
 </div>
-
-
-
+</div>
+</div>
+</div>
 </div> <!-- /container -->
