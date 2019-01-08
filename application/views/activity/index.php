@@ -24,6 +24,10 @@
  
   <div class="row">
       <div class="col-md-6 pull-right">
+         <div class="input-group">
+            <span class="input-group-addon">Buscar</span>
+            <input id="filtrar" type="text" class="form-control" placeholder="Ingresa la canción de este Disco que deseas Buscar...">
+          </div>
           <form class="form-inline" action="<?php echo base_url() . 'activity'; ?>" method="post">
             <select class="form-control" name="field">
                 <option selected="selected" disabled="disabled" value="">Filtrar por</option>
@@ -41,7 +45,8 @@
  <!-- Main table -->
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-bordered table-striped table-hover">
+      <table class="table table-bordered table-striped table-hover table-condensed">
+
         <thead>
           <tr>
             <th>Nº</th>
@@ -53,7 +58,7 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="buscar">
 		
     	<?php foreach ($activity as $activity_item): ?>
 				
@@ -86,3 +91,23 @@
 
 
 </div> <!-- /container -->
+
+<script>
+$(document).ready(function () {
+ 
+            (function ($) {
+ 
+                $('#filtrar').keyup(function () {
+ 
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+ 
+                })
+ 
+            }(jQuery));
+ 
+        });
+</script>

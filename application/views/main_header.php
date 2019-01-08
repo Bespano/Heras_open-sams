@@ -3,10 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
  <header class="header">
-                <a href="<?php echo site_url('index'); ?>" class="logo">
-                    <span class="logo-mini"><b>A</b><?php echo "title_mini";//$title_mini; ?></span>
-                    <span class="logo-lg"><b>Admin</b><?php echo "title_lg";//$title_lg; ?></span>
-                </a>
+    <a href="<?php echo site_url('index'); ?>" class="logo">
+        <span class="logo-mini"><b>A</b><?php echo "title_mini";//$title_mini; ?></span>
+        <span class="logo-lg"><b>Admin</b><?php echo "title_lg";//$title_lg; ?></span>
+    </a>
 
                 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top justify-content-between ">
@@ -44,42 +44,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <!-- User Account -->
       <span class="navbar-text pull-right">
-        <li class="dropdown ">
-            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                Usuario<span class="glyphicon glyphicon-user hidden-xs user-image" alt="User Menu"></span> 
-            </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        
-                        <p><?php echo 'Usuario conectado'; ?><small><?php echo lang('header_member_since'); ?> <?php echo date('d-m-Y', '15659856'); ?></small></p>
-                    </li>
-                    <li class="user-body">
-                        <div class="row">
-                            <div class="col-xs-4 text-center">
-                                <a href="#"></a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#"></a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#"></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="user-footer">
-                       
-                        <div>
-                            <a href="<?php echo site_url('auth/logout'); ?>" ><?php echo 'Log_out'; ?></a>
-                        </div>
-                    </li>
-                </ul>
-            </li>
 
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user hidden-xs user-image" alt="User Menu"></span> Usuario
+            </a>
+            <ul class="dropdown-menu">              
+               <li >                    
+                    <div class="pull-left">
+                        <a href="<?php echo site_url('auth/logout'); ?>" ><button type="button" class="btn btn-default">Salir</button></a>
+                    </div>
+                </li>
+            </ul>
+        </li>
 
       </span>
-
-
-
     </div><!--/.nav-collapse -->
   </div>
 </nav>
