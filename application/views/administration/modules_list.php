@@ -16,17 +16,25 @@
       </div>
       <div class="row">
         <div class="col-sm-4">
-    <form>
-    <div class="btn-group" data-toggle="buttons">
-        <?php foreach ($module_data as $module_item): ?>   
-          <?php echo validation_errors(); ?>
-          <?php echo form_open('administration/get_module_status/'); ?>
-              <label class="btn btn-primary <?php if($module_item['module_status']) { ?> active <?php } ?>">
-                <input type="checkbox"><?php echo $module_item['module_name']; ?>
-              </label>
-        <?php endforeach; ?>
-        <input type="submit" name="submit" value="Guardar" class="btn btn-primary"/>
-    </div>
+  
+
+<form>
+
+     
+    <?php foreach ($module_data as $module_item): ?>   
+        <?php echo validation_errors(); ?>
+        <?php echo form_open('administration/set_module_status/'); ?>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" <?php if($module_item['module_status']) { echo 'checked="checked"'; } ?>" value="">
+            <label class="form-check-label" for="defaultCheck1"><?php echo $module_item['module_name']; ?></label>
+          </div>
+    <?php endforeach; ?>
+    
+
+  
+<input type="submit" name="submit" value="Guardar" class="btn btn-primary"/>
+</div>
+</form>
 
 </div>
 </div>
