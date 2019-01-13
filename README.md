@@ -1,4 +1,7 @@
 # HERAS_open-SAMS
+
+[![Join the chat at https://gitter.im/Heras_open-sams/community](https://badges.gitter.im/Heras_open-sams/community.svg)](https://gitter.im/Heras_open-sams/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 HERAS Open Web application for Social Assistance Management System (SAMS)
 
 This is a CodeIgniter 3.1.2 PHP web application using Bootstrap 3 CSS and MySQL as the database engine. 
