@@ -26,6 +26,7 @@ class Volunteers_model extends CI_Model {
                         'volunteer_phone' => $this->input->post('volunteer_phone'),
                         'volunteer_occupation' => $this->input->post('volunteer_occupation'),
                         'volunteer_profession' => $this->input->post('volunteer_profession'),
+                        'volunteer_preferences' => $this->input->post('volunteer_preferences'),
                         'volunteer_availability' => $this->input->post('volunteer_availability'),
                         'volunteer_experience' => $this->input->post('volunteer_experience'),
                         
@@ -59,6 +60,7 @@ class Volunteers_model extends CI_Model {
                         'volunteer_phone' => $this->input->post('volunteer_phone'),
                         'volunteer_occupation' => $this->input->post('volunteer_occupation'),
                         'volunteer_profession' => $this->input->post('volunteer_profession'),
+                        'volunteer_preferences' => $this->input->post('volunteer_preferences'),
                         'volunteer_availability' => $this->input->post('volunteer_availability'),
                         'volunteer_experience' => $this->input->post('volunteer_experience'),
                 );

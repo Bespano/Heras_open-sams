@@ -9,14 +9,14 @@ class Activity_model extends CI_Model {
 	public function get_activity()
         {
                 //$query = $this->db->get('activity');
-                 $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idGroup");
+                 $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idSubcategory")->order_by('activity_date');
                 $query = $this->db->get();
                 return $query->result_array();
         }
 
     public function get_activity_WhereLike($field, $search)
         {
-            $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idGroup")->like('activity_description', $search)->order_by('activity_date');
+            $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idSubcategory")->like('activity_description', $search)->order_by('activity_date');
             $query = $this->db->get();
             return $query->result_array();
         }
@@ -24,12 +24,12 @@ class Activity_model extends CI_Model {
         public function get_categories()
         {
                 
-                 $result = $this -> db -> select('idCategory, Category') -> get('categories') -> result_array(); 
+                 $result = $this -> db -> select('*') -> get('categories') -> result_array(); 
  
                 $categories=array();
                 $categories[''] = 'Elija categoría...'; 
                 foreach($result as $r){
-                        $categories[$r['idCategory']] = $r['Category']; 
+                        $categories[$r['idCategory']] = $r['category_name']; 
                 
                 }
                 
@@ -39,12 +39,12 @@ class Activity_model extends CI_Model {
         public function get_subcategories()
         {
                 
-                 $result = $this -> db -> select('idGroup, Groups') -> get('subcategories') -> result_array(); 
+                 $result = $this -> db -> select('*') -> get('subcategories') -> result_array(); 
  
                 $groups=array();
                 $groups[''] = 'Elija grupo...'; 
                 foreach($result as $r){
-                        $groups[$r['idGroup']] = $r['Groups']; 
+                        $groups[$r['idSubcategory']] = $r['subcategory']; 
                 
                 }
                 
@@ -73,7 +73,7 @@ class Activity_model extends CI_Model {
 
     public function get_activityById($idActivity)
         {                              
-            $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idGroup")->like('IdActivity', $idActivity);
+            $this->db->select("*")->from("activity")->join("categories", "activity.activity_category = categories.idCategory")->join("subcategories","activity.activity_subcategory=subcategories.idSubcategory")->like('IdActivity', $idActivity);
             $query = $this->db->get();
             return $query->result_array();
         }

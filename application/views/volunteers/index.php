@@ -1,38 +1,5 @@
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index">Asistencia Social</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li ><a href="index">Inicio</a></li>
-        <li ><a href="activity">Actividad</a></li>
-        <li class="active"><a href="volunteers">Voluntarios</a></li>
-        <li><a href="pantry">Despensa</a></li>
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Áreas <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Salud</a></li>
-            <li><a href="#">Educación</a></li>
-            <li><a href="#">Carcelario</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
+
 
 <div class="container theme-showcase" role="main">
 
@@ -53,23 +20,29 @@
       <div class="alert alert-success" role="alert">
         <strong>Correcto</strong> <?php echo $info_message_view; ?>
       </div>
-      <?php 
-  }else
-  {
-    echo "no info_message";
-  }?>
+      <?php  }?>
  
-  
- <div class="pull-right">
-    <a href="volunteers/insert_volunteer"><button type="button" class="btn btn-primary">Nuevo Voluntario</button></a>
+  <div class="row">
+    <div class="col-md-6 pull-right">
+
+          <form class="form-inline" action="<?php echo base_url() . 'volunteers'; ?>" method="post">
+                <select class="form-control" name="field">
+                    <option selected="selected" disabled="disabled" value="">Filtrar por</option>
+                    <option value="volunteer_firstname">Nombre</option>
+                    <option value="volunteer_phone">Teléfono</option>
+                </select>
+                <input class="form-control" type="text" name="search" value="" placeholder="Buscar...">
+                <input class="btn btn-default" type="submit" name="filter" value="Ir">  
+                <a href="volunteers/insert_volunteer"><button type="button" class="btn btn-primary">Nuevo Voluntario</button></a>
+          </form>
+      </div>
+
   </div>
 
-<div class="row">
-    </br>
- </div>
 
   <div class="row">
     <div class="col-md-12">
+
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
@@ -96,12 +69,12 @@
               <td><?php echo $volunteer_item['volunteer_email']; ?></td>
             
 	            <td>  	   
-				    <?php /*View button*/ echo anchor('volunteers/view_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-primary">Ver</button>');?>
-				   
-            <?php /*Edit button*/ echo anchor('volunteers/edit_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-warning">Editar</button>');?>
-				   
-            <?php /*Delete button*/ $onclick = array('onclick'=>"return confirm('Desea borrar del voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/delete/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
-				</td>
+    				    <?php /*View button*/ echo anchor('volunteers/view_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-primary">Ver</button>');?>
+    				   
+                <?php /*Edit button*/ echo anchor('volunteers/edit_volunteer/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-warning">Editar</button>');?>
+    				   
+                <?php /*Delete button*/ $onclick = array('onclick'=>"return confirm('Desea borrar del voluntario nº ".$volunteer_item['idVolunteer']." ?')");?> <?=anchor('volunteers/delete/'.$volunteer_item['idVolunteer'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
+				      </td>
 
 	        </tr>
         <?php endforeach; ?>
@@ -111,7 +84,7 @@
         </tbody>
       </table>
     </div> <!-- class="col-nav 6" -->
-    
+
   </div>
 
 

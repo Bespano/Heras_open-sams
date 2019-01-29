@@ -6,7 +6,12 @@ class Volunteers extends CI_Controller {
                 parent::__construct();
                 $this->load->model('volunteers_model');
                 $this->load->helper('url_helper');
-                $this->load->library('session');
+                $this->load->library('ion_auth');
+			    if (!$this->ion_auth->logged_in())
+			    {
+			      //redirect them to the login page
+			      redirect('Auth/login', 'refresh');
+			    }
         }
 
 
@@ -16,6 +21,7 @@ class Volunteers extends CI_Controller {
 			$this->viewdata = (empty($data)) ? $this->data : $data;
 
 			$this->load->view('header.php', $this->viewdata);
+			$this->load->view('main_header.php', $this->viewdata);
 			$this->load->view($view, $this->viewdata);
 			$this->load->view('footer.php', $this->viewdata);
 		}
@@ -32,6 +38,7 @@ echo $data['info_message'];
 				'volunteers' => $this->volunteers_model->get_volunteers(),
 				'title'=> 'Voluntarios',
 				'info_message_view' => $msg,
+				'menu_active'=>'volunteers',
 			);
 			
 
@@ -54,6 +61,8 @@ echo $data['info_message'];
 
 			$data = array(
 				'title' => 'Nuevo Voluntario/a',
+				'menu_active'=>'activity',
+				'menu_active'=>'volunteers',
 				//'preferences' => $this->volunteers_model->get_preferences(),
 				//'groups' => $this->volunteers_model->get_groups()
 			);
@@ -86,16 +95,19 @@ echo $data['info_message'];
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $this->load->library('session');			
+			
             
-            $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
+            $data=array(
+            	'volunteer_item' => $this->volunteers_model->get_volunteerById($idVolunteer),
+            	'menu_active'=>'volunteers',
+        	);
 		   
 		    if (empty($data['volunteer_item']))
 			{
 				show_404();
 			}	
 
-			$this->form_validation->set_rules('volunteer_firstname', 'Volunteer First name', 'required');
+			//$this->form_validation->set_rules('volunteer_firstname', 'Volunteer First name', 'required');
 			//$data['title'] = $data['volunteer_item']['idVolunteer'];
  			if ($this->form_validation->run() === FALSE)
 			{
@@ -118,7 +130,10 @@ echo $data['info_message'];
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $data['volunteer_item'] = $this->volunteers_model->get_volunteerById($idVolunteer);
+            $data=array(
+            	'volunteer_item' => $this->volunteers_model->get_volunteerById($idVolunteer),
+            	'menu_active'=>'volunteers',
+        	);
 		   
 		    if (empty($data['volunteer_item']))
 			{

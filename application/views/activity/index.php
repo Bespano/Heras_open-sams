@@ -1,38 +1,4 @@
-<!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index">Asistencia Social</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li ><a href="index">Inicio</a></li>
-        <li class="active"><a href="activity">Actividad</a></li>
-        <li><a href="volunteers">Voluntarios</a></li>
-        <li><a href="pantry">Despensa</a></li>
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Áreas <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Salud</a></li>
-            <li><a href="#">Educación</a></li>
-            <li><a href="#">Carcelario</a></li>
-            <li role="separator" class="divider"></li>
-            <li class="dropdown-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
+
 
 <div class="container theme-showcase" role="main">
 
@@ -46,21 +12,19 @@
   <div class="page-header">
     <h2>Registro de Actividad</h2>
   </div>
-   <?php echo $success; 
-    if (isset($success)){ ?>
+   <?php  
+    if (isset($message)){ ?>
     
         <div class="alert alert-success" role="alert">
-          <strong>Correcto</strong> <?php   echo (isset($success)) ? $success : "";?>
+          <div id="infoMessage"><?php echo $message;?></div>
       </div>
-  <?php       
-    }else{?>
-      <div class="alert alert-info" role="alert"> "Sin cambios"</div>
       
    <?php }?>
 
  
   <div class="row">
-      <div class="pull-right">
+      <div class="col-md-6 pull-right">
+         
           <form class="form-inline" action="<?php echo base_url() . 'activity'; ?>" method="post">
             <select class="form-control" name="field">
                 <option selected="selected" disabled="disabled" value="">Filtrar por</option>
@@ -75,12 +39,11 @@
       </div>
 </div>
  
- <div class="row">
-    </br>
- </div>
+ <!-- Main table -->
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-bordered table-striped table-hover">
+      <table class="table table-bordered table-striped table-hover table-condensed">
+
         <thead>
           <tr>
             <th>Nº</th>
@@ -92,7 +55,7 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="buscar">
 		
     	<?php foreach ($activity as $activity_item): ?>
 				
@@ -100,8 +63,8 @@
 	            <td><?php echo $activity_item['idActivity']; ?></td>
 	            <td><?php echo date("d/m/Y", strtotime($activity_item['activity_date'])); ?></td>
 	            <td><?php echo $activity_item['activity_description']; ?></td>
-	            <td><?php echo $activity_item['Category']; ?></td>
-	            <td><?php echo $activity_item['Groups']; ?></td>
+	            <td><?php echo $activity_item['category_name']; ?></td>
+	            <td><?php echo $activity_item['subcategory']; ?></td>
 	            <td><?php echo $activity_item['activity_amount']; ?> €</td>
 	            <td>  	   
             <?php /*View button*/ echo anchor('activity/view_activity/'.$activity_item['idActivity'], '<button type="button" class="btn btn-primary">Ver</button>');?>
@@ -120,8 +83,9 @@
       </table>
     </div> <!-- class="col-nav 6" -->
     
-</div>
+</div><!-- main table  -->
 
 
 
 </div> <!-- /container -->
+

@@ -6,6 +6,12 @@ class Activity extends CI_Controller {
                 parent::__construct();
                 $this->load->model('activity_model');
                 $this->load->helper('url_helper');
+                $this->load->library('Ion_auth');
+			    if (!$this->ion_auth->logged_in())
+			    {
+			      //redirect them to the login page
+			      redirect('Auth/login', 'refresh');
+			    }
         }
 
 
@@ -14,6 +20,7 @@ class Activity extends CI_Controller {
 			$this->viewdata = (empty($data)) ? $this->data : $data;
 
 			$this->load->view('header.php', $this->viewdata);
+			$this->load->view('main_header.php', $this->viewdata);
 			$this->load->view($view, $this->viewdata);
 			$this->load->view('footer.php', $this->viewdata);
 		}
@@ -26,7 +33,8 @@ class Activity extends CI_Controller {
 			$data = array(
 				'page_title' => 'Actividad',
 				'title'=> 'Actividad',
-				'success'=> ''
+				'success'=> '',
+				'menu_active'=>'activity',
 			);
 
 			
@@ -51,9 +59,11 @@ class Activity extends CI_Controller {
 			$data = array(
 				'title' => 'Nueva Actividad',
 				'categories' => $this->activity_model->get_categories(),
-				'subcategories' => $this->activity_model->get_subcategories()
+				'subcategories' => $this->activity_model->get_subcategories(),
+				'menu_active'=>'activity',
 			);
 
+			$this->form_validation->set_rules('activity_date', 'Fecha','callback_check_date', 'required');
 			$this->form_validation->set_rules('activity_description', 'Descripción', 'required');
 			$this->form_validation->set_rules('activity_category', 'Categoría', 'required');
 			$this->form_validation->set_rules('activity_subcategory', 'Subcategoría', 'required');
@@ -67,8 +77,23 @@ class Activity extends CI_Controller {
 			else
 			{
 				$this->activity_model->set_activity();
-				$data['success'] = "La actividad se ha registrado con éxito.";
+
+				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 				redirect('activity', $data);
+			}
+		}
+
+
+		public function check_date($inputdate)
+		{	
+			if(!$inputdate)
+			{
+				$this->form_validation->set_message('check_date', 'El campo {field} no puede tener ese formato. Escriba la fecha en formato AAAA/MM/YY');
+				return FALSE; 			
+			}else
+			{
+				return TRUE; 
 			}
 		}
 
@@ -79,32 +104,19 @@ class Activity extends CI_Controller {
 			redirect('activity', $data);
 		}
 
-        public function view($slug = NULL)
-        {
-                $data['news_item'] = $this->news_model->get_news($slug);
-				        if (empty($data['news_item']))
-						{
-							show_404();
-						}	
-
-				$data['title'] = $data['news_item']['title'];
-
-				$this->load->view('templates/header', $data);
-				$this->load->view('news/view', $data);
-				$this->load->view('templates/footer');
-        }
 
         public function edit_activity($idActivity = NULL)
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $this->load->library('session');			
+           		
                       
 		    $data = array(
-				'title' => 'Nueva Actividad',
+				'title' => 'Editar una actividad',
 				'activity_item' => $this->activity_model->get_activityById($idActivity),
 				'categories' => $this->activity_model->get_categories(),
-				'subcategories' => $this->activity_model->get_subcategories()
+				'subcategories' => $this->activity_model->get_subcategories(),
+				'menu_active'=>'activity',
 			);
 		    if (empty($data['activity_item']))
 			{
@@ -134,14 +146,19 @@ class Activity extends CI_Controller {
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-            $data['activity_item'] = $this->activitys_model->get_activityById($idactivity);
+            $data=array(
+            	'activity_item' => $this->activity_model->get_activityById($idactivity),
+            	'categories' => $this->activity_model->get_categories(),
+				'subcategories' => $this->activity_model->get_subcategories(),
+				'menu_active'=>'activity',
+            );
 		   
 		    if (empty($data['activity_item']))
 			{
 				show_404();
 			}	
 		
-			$this->_render_page('activitys/view_activity.php', $data);			
+			$this->_render_page('activity/view_activity.php', $data);			
         }
 
 
