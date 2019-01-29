@@ -2,25 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
- <header class="header">
-    <a href="<?php echo site_url('index'); ?>" class="logo">
-        <span class="logo-mini"><b>A</b><?php echo "title_mini";//$title_mini; ?></span>
-        <span class="logo-lg"><b>Admin</b><?php echo "title_lg";//$title_lg; ?></span>
-    </a>
-
-                <!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top justify-content-between ">
+<header class="header">
+<nav class="navbar navbar-default navbar-fixed-left ">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo base_url();?>index">Asistencia Social</a>
+      <a class="navbar-brand" href="<?php echo base_url();?>index">HERAS</a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
+
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
         
         <li <?php if ($menu_active=='activity') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>activity">Actividad</a></li>
@@ -30,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administración <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li<?php if ($menu_active=='administration') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>administration">Categorías y Subcategorías</a></li>
+            <li <?php if ($menu_active=='administration') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>administration">Categorías y Subcategorías</a></li>
             <li><a href="#">Usuarios</a></li>
             <li <?php if ($menu_active=='modules') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>administration/get_modules_list">Módulos</a></li>
             <li role="separator" class="divider"></li>
@@ -43,7 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 <!-- User Account -->
-      <span class="navbar-text pull-right">
+      <ul class="nav navbar-nav navbar-right">
+      <span class="navbar-text">
 
         <li class="dropdown">
             <a href="#" class="dropdown-toggle " data-toggle="dropdown">
@@ -51,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
             <ul class="dropdown-menu">              
                <li >                    
-                    <div class="pull-left">
+                    <div class="pull-center">
                         <a href="<?php echo site_url('auth/logout'); ?>" ><button type="button" class="btn btn-default">Salir</button></a>
                     </div>
                 </li>
@@ -59,7 +55,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </li>
 
       </span>
+    </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Library</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data</li>
+  </ol>
+</nav>
 </header>
+
+

@@ -24,10 +24,7 @@
  
   <div class="row">
       <div class="col-md-6 pull-right">
-         <div class="input-group">
-            <span class="input-group-addon">Buscar</span>
-            <input id="filtrar" type="text" class="form-control" placeholder="Ingresa la canción de este Disco que deseas Buscar...">
-          </div>
+         
           <form class="form-inline" action="<?php echo base_url() . 'activity'; ?>" method="post">
             <select class="form-control" name="field">
                 <option selected="selected" disabled="disabled" value="">Filtrar por</option>
@@ -92,22 +89,3 @@
 
 </div> <!-- /container -->
 
-<script>
-$(document).ready(function () {
- 
-            (function ($) {
- 
-                $('#filtrar').keyup(function () {
- 
-                    var rex = new RegExp($(this).val(), 'i');
-                    $('.buscar tr').hide();
-                    $('.buscar tr').filter(function () {
-                        return rex.test($(this).text());
-                    }).show();
- 
-                })
- 
-            }(jQuery));
- 
-        });
-</script>
