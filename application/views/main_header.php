@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administración <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li <?php if ($menu_active=='administration') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>administration">Categorías y Subcategorías</a></li>
-            <li <?php if ($menu_active=='administration') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>administration">Áreas</a></li>
+            <li <?php if ($menu_active=='area') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>areas">Áreas</a></li>
             <li><a href="#">Usuarios</a></li>
             <li <?php if ($menu_active=='modules') { ?> class="active" <?php }?> ><a href="<?php echo base_url(); ?>administration/get_modules_list">Módulos</a></li>
             <li role="separator" class="divider"></li>
