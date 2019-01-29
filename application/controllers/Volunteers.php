@@ -98,6 +98,7 @@ echo $data['info_message'];
 			
             
             $data=array(
+            	'page_title' => 'Editar Voluntario/a',
             	'volunteer_item' => $this->volunteers_model->get_volunteerById($idVolunteer),
             	'menu_active'=>'volunteers',
         	);

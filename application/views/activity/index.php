@@ -50,7 +50,7 @@
             <th>Fecha</th>
             <th>Concepto</th>
             <th>Categoría</th>
-            <th>Grupo</th>
+            <th>Subcategoría</th>
             <th>Cantidad</th>
             <th>Acciones</th>
           </tr>
