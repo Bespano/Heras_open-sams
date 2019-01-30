@@ -15,7 +15,7 @@
       </div>
       <div class="row">
         <div class="pull-right">
-             <a href="area/insert_area"><button type="button" class="btn btn-primary">Nueva Área</button></a>
+             <a href="areas/insert_area"><button type="button" class="btn btn-primary">Nueva Área</button></a>
         </div>
       
       <table class="table table-bordered table-striped table-hover">

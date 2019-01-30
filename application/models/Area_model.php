@@ -34,9 +34,9 @@ class Area_model extends CI_Model {
         {
                               
                 $data = array(
-                    'category' => $this->input->post('area'),
+                    'area_name' => $this->input->post('area_name'),
                 );
-                return $this->db->insert('area', $data);
+                return $this->db->insert('areas', $data);
         }
         
 

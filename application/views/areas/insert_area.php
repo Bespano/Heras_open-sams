@@ -22,18 +22,18 @@
         
           <?php echo validation_errors(); ?>
 
-          <?php echo form_open('administration/insert_area'); ?>
+          <?php echo form_open('areas/insert_area'); ?>
 
           <div class="form-group row">
             <form>
               <div class="col-md-6">
-                <label for="category_label">Nombre de Área</label>
-                <input class="form-control" type="input" name="area" /><br />
+                <label for="area_label">Nombre de Área</label>
+                <input class="form-control" type="input" name="area_name" /><br />
               </div>
               
           </div>
           <input type="submit" name="submit" value="Guardar" class="btn btn-primary"/> 
-              <?php anchor('administration/index','Volver', '<button type="button" class="btn btn-danger">Volver</button>');?>
+              <?php anchor('areas/index','Volver', '<button type="button" class="btn btn-danger">Volver</button>');?>
             </form>
           </div>
       </div>

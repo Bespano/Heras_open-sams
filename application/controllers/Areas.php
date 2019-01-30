@@ -52,52 +52,25 @@ class Areas extends CI_Controller {
 			
 
 			$data = array(
-				'title' => 'Nueva Categoría',
+				'title' => 'Nueva Área',
+				'page_title' => 'Nueva Área',
 				'menu_active'=> 'area',
 			);
-			$this->form_validation->set_rules('category', 'Categoría', 'required');
+			$this->form_validation->set_rules('area_name', 'Área', 'required');
 			if ($this->form_validation->run() === FALSE)
 			{
 				// if person does not fill in correct info, they get resubmitted back to the form.             	
-				$this->_render_page('area/insert_category', $data);
+				$this->_render_page('areas/insert_area', $data);
 			}
 			else
 			{
-				$this->area_model->set_category();
-				$data['success'] = "La categoría se ha registrado con éxito.";
-				redirect('area', $data);
+				$this->area_model->set_area();
+				$data['success'] = "El área se ha registrado con éxito.";
+				redirect('areas', $data);
 			}
 		}
 
-		public function insert_subcategory()
-		{
-			$this->load->helper('form');
-			$this->load->library('form_validation');
-			
-
-			$data = array(
-				'title' => 'Nueva Subcategoría',
-				'menu_active'=> 'area',
-			);
-
-
-			$this->form_validation->set_rules('subcategory', 'Subcategoría', 'required');
-	
-
-			if ($this->form_validation->run() === FALSE)
-			{
-				// if person does not fill in correct info, they get resubmitted back to the form.             
-            	
-				$this->_render_page('area/insert_subcategory', $data);
-			}
-			else
-			{
-				$this->area_model->set_subcategory();
-				$data['success'] = "La subcategoría se ha registrado con éxito.";
-				redirect('area', $data);
-			}
-		}
-
+		
 
 		public function delete_category($data = null){
 			$this->area_model->delete_category($data);
@@ -105,11 +78,7 @@ class Areas extends CI_Controller {
 			redirect('area', $data);
 		}
 
-		public function delete_subcategory($data = null){
-			$this->area_model->delete_subcategory($data);
-			$data['success'] = "La subcategoría se ha borrado con éxito.";
-			redirect('area', $data);
-		}
+		
 
      
 
