@@ -30,43 +30,21 @@
 		
     	<?php foreach ($area as $area_item): ?>
 				
-	        <tr onclick="input" data-toggle="modal" href="#Viewarea_Modal">
+	        <tr >
 	            <td><?php echo $area_item['idArea']; ?></td>
 	            <td><?php echo $area_item['area_name']; ?></td>
 
 	            <td>  	   
 
 
-              <!-- Modal -->
-                <div class="modal fade" id="Viewarea_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detalle Área</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <?php echo $area_item['idArea']; ?>
-                        <?php echo $area_item['area_name']; ?>
-                        <?php echo $area_item['area_creationdate']; ?>
-                        <?php echo $area_item['area_lastmodificationdate']; ?>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>    
+                 
 
 
 
            
-            <?php /*Edit button*/ echo anchor('area/edit_area/'.$area_item['idArea'], '<button type="button" class="btn btn-warning">Editar</button>');?>
+            <?php /*Edit button*/ echo anchor('areas/edit_area/'.$area_item['idArea'], '<button type="button" class="btn btn-warning">Editar</button>');?>
            
-            <?php /*Delete button*/ $onclick = array('onclick'=>"return confirm('Confirmar borrado de la categoría nº ".$category_item['idCategory']." ?')");?> <?=anchor('administration/delete_category/'.$category_item['idCategory'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
+            <?php /*Delete button*/ $onclick = array('onclick'=>"return confirm('Confirmar borrado de la categoría nº ".$area_item['idArea']." ?')");?> <?=anchor('areas/delete_area/'.$area_item['idArea'], '<button type="button" class="btn btn-danger">Borrar</button>', $onclick);?>
 				</td>
 
 	        </tr>

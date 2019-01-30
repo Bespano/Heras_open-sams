@@ -42,25 +42,10 @@ class Areas extends CI_Controller {
 		}
 
 
-		public function get_modules_list($data = null)
-		{
-			$this->load->helper('form');
-			$this->load->library('form_validation');
-
-			$data = array(
-				'page_title' => 'Administrador',
-				'title'=> 'Administrador de Módulos',
-				'menu_active'=> 'area'
-			);
-
-			$data['module_data'] = $this->area_model->get_modules();
-			
-			$this->_render_page('area/modules_list.php', $data);
-		}
-
+		
 
 		
-		public function insert_category()
+		public function insert_area()
 		{
 			$this->load->helper('form');
 			$this->load->library('form_validation');
@@ -128,83 +113,51 @@ class Areas extends CI_Controller {
 
      
 
-        public function edit_category($idCategory = NULL)
+        public function edit_area($idArea = NULL)
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
 		
                       
 		    $data = array(
-				'title' => 'Editar categoría',
-				'category_item' => $this->area_model->get_categoryById($idCategory),
+				'title' => 'Editar área',
+				'page_title' => 'Editar área',
+				'area_item' => $this->area_model->get_areaById($idArea),
 				'menu_active'=> 'area',
 
 			);
-		    if (empty($data['category_item']))
+		    if (empty($data['area_item']))
 			{
 				show_404();
 			}	
 
-			$this->form_validation->set_rules('category', 'category', 'required');
+			$this->form_validation->set_rules('area_name', 'area', 'required');
 			//$data['title'] = $data['activity_item']['idactivity'];
  			if ($this->form_validation->run() === FALSE)
 			{
 				// if person does not fill in correct info, they get resubmitted back to the form.             
-				$this->_render_page('area/edit_category.php', $data);
+				$this->_render_page('areas/edit_area.php', $data);
 
 			}
 			else
 			{
-				$this->area_model->update_category($idCategory,$data);
+				$this->area_model->update_area($idArea,$data);
 				$this->session->set_flashdata('info_message', 'La categoría se ha modificado con éxito.');
 				$data['info_message']=$this->session->flashdata('info_message');
-				redirect('area', $data);
+				redirect('areas', $data);
 			}
 			
         }
 
-        public function edit_subcategory($idSubcategory = NULL)
+       
+
+        public function view_area($idArea = NULL)
         {
             $this->load->helper('form');
 			$this->load->library('form_validation');
-		
-                      
-		    $data = array(
-				'title' => 'Editar Subcategoría',
-				'subcategory_item' => $this->area_model->get_subcategoryById($idSubcategory),
-				'menu_active'=> 'area',
-
-			);
-		    if (empty($data['subcategory_item']))
-			{
-				show_404();
-			}	
-
-			$this->form_validation->set_rules('subcategory', 'subcategory', 'required');
-			//$data['title'] = $data['activity_item']['idactivity'];
- 			if ($this->form_validation->run() === FALSE)
-			{
-				// if person does not fill in correct info, they get resubmitted back to the form.             
-				$this->_render_page('area/edit_subcategory.php', $data);
-
-			}
-			else
-			{
-				$this->area_model->update_subcategory($idSubcategory,$data);
-				$this->session->set_flashdata('info_message', 'La subcategoría se ha modificado con éxito.');
-				$data['info_message']=$this->session->flashdata('info_message');
-				redirect('area', $data);
-			}
-			
-        }
-
-        public function view_category($idCategory = NULL)
-        {
-            $this->load->helper('form');
-			$this->load->library('form_validation');
-            $data['category_item'] = $this->area_model->get_categoryById($idCategory);
+            $data['area_item'] = $this->area_model->get_areaById($idArea);
 		   
-		    if (empty($data['category_item']))
+		    if (empty($data['area_item']))
 			{
 				show_404();
 			}	

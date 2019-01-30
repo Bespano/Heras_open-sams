@@ -23,7 +23,12 @@ class Area_model extends CI_Model {
 
 
 
-        
+        public function get_areaById($idArea)
+        {                              
+            $this->db->select("*")->from("areas")->like('IdArea', $idArea);
+            $query = $this->db->get();
+            return $query->result_array();
+        }
 
         public function set_area()
         {
@@ -46,11 +51,11 @@ class Area_model extends CI_Model {
         {
                               
                 $data = array(
-                        'area' => $this->input->post('area'),
+                        'area_name' => $this->input->post('area_name'),
 
                 );
                 $this->db->where('idArea', $idArea);
-                return $this->db->update('area', $data);
+                return $this->db->update('areas', $data);
 
         }
     
