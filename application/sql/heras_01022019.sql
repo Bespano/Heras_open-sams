@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-02-2019 a las 17:11:01
+-- Tiempo de generación: 01-02-2019 a las 17:54:40
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.2.12
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `activity`
 --
 
+DROP TABLE IF EXISTS `activity`;
 CREATE TABLE `activity` (
   `idActivity` int(11) NOT NULL,
   `activity_date` date NOT NULL,
@@ -71,6 +72,7 @@ INSERT INTO `activity` (`idActivity`, `activity_date`, `activity_description`, `
 -- Estructura de tabla para la tabla `areas`
 --
 
+DROP TABLE IF EXISTS `areas`;
 CREATE TABLE `areas` (
   `idArea` int(11) NOT NULL,
   `area_name` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
@@ -93,6 +95,7 @@ INSERT INTO `areas` (`idArea`, `area_name`, `area_creationdate`, `area_lastmodif
 -- Estructura de tabla para la tabla `categories`
 --
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `idCategory` int(11) NOT NULL,
   `category_name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -115,6 +118,7 @@ INSERT INTO `categories` (`idCategory`, `category_name`, `category_creationdate`
 -- Estructura de tabla para la tabla `groups`
 --
 
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` mediumint(8) UNSIGNED NOT NULL,
   `name` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
@@ -136,6 +140,7 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 -- Estructura de tabla para la tabla `login_attempts`
 --
 
+DROP TABLE IF EXISTS `login_attempts`;
 CREATE TABLE `login_attempts` (
   `id` int(11) UNSIGNED NOT NULL,
   `ip_address` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
@@ -149,6 +154,7 @@ CREATE TABLE `login_attempts` (
 -- Estructura de tabla para la tabla `modules`
 --
 
+DROP TABLE IF EXISTS `modules`;
 CREATE TABLE `modules` (
   `idModule` int(11) NOT NULL,
   `module_name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -171,6 +177,7 @@ INSERT INTO `modules` (`idModule`, `module_name`, `module_code`, `module_status`
 -- Estructura de tabla para la tabla `subcategories`
 --
 
+DROP TABLE IF EXISTS `subcategories`;
 CREATE TABLE `subcategories` (
   `idSubcategory` int(11) NOT NULL,
   `subcategory` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
@@ -193,6 +200,7 @@ INSERT INTO `subcategories` (`idSubcategory`, `subcategory`, `subcategory_creati
 -- Estructura de tabla para la tabla `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
   `ip_address` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
@@ -220,7 +228,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$v9VVlq1nVjqQeoNbKFqvheUxGIHOkiH.tXO5mJZgWRUKclX.LjUJ6', 'admin@admin.com', NULL, '', NULL, NULL, NULL, '34455c9d7cd2872ae6c573c8ff02f8aedb4a5984', '$2y$10$VE.5QC/f.2hl0IdBaVGYFu8rLosOm.QuLOlTubDqEwkdeYiwS3WyC', 1268889823, 1549037318, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$12$v9VVlq1nVjqQeoNbKFqvheUxGIHOkiH.tXO5mJZgWRUKclX.LjUJ6', 'admin@admin.com', NULL, '', NULL, NULL, NULL, 'b2aebd8c121ef9ee77f36b357ed66c682ace5e21', '$2y$10$eEJgUb3iu9FIUWIYExOzA.qEi5wNSup7dqlUA5NQsRzhVHY7yXzjy', 1268889823, 1549037862, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 (2, '::1', 'bienvenido.espinosa@gmail.com', '$2y$10$/BQmNDGDiSjA7pkI7xbVAO7H4SkEI2pngLbOypDJCXj7fJHp3/qeq', 'bienvenido.espinosa@gmail.com', NULL, NULL, '4589da9e5dfbe9958954', '$2y$10$f42qKhylC1uPNrssE1uZfOpqGeStz0PXeWqMV31OiYSJjFIIS72ta', 1546527482, NULL, NULL, 1544856593, NULL, 1, 'Bienvenido', 'Espinosa Cano', 'HM', '686269326');
 
 -- --------------------------------------------------------
@@ -229,6 +237,7 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activ
 -- Estructura de tabla para la tabla `users_groups`
 --
 
+DROP TABLE IF EXISTS `users_groups`;
 CREATE TABLE `users_groups` (
   `id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
@@ -250,6 +259,7 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 -- Estructura de tabla para la tabla `volunteers`
 --
 
+DROP TABLE IF EXISTS `volunteers`;
 CREATE TABLE `volunteers` (
   `idVolunteer` int(11) NOT NULL,
   `volunteer_firstname` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
