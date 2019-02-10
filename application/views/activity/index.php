@@ -11,6 +11,7 @@
 
   <div class="page-header">
     <h2>Registro de Actividad</h2>
+    <a href="activity/view_report"><button type="button" class="btn btn-primary">Ver Informe</button></a>
   </div>
    <?php  
     if (isset($message)){ ?>

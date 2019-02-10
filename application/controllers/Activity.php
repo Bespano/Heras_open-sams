@@ -162,4 +162,21 @@ class Activity extends CI_Controller {
         }
 
 
+        public function view_report($data = null)
+		{
+			
+			$data = array(
+				'page_title' => 'Informe',
+				'title'=> 'Informe',
+				'menu_active'=>'activity',
+			);
+    
+            $data['activity'] = $this->activity_model->get_activityreport();
+        
+
+
+			$this->_render_page('activity/view_report.php', $data);
+		}
+
+
 }

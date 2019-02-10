@@ -92,4 +92,23 @@ class Activity_model extends CI_Model {
                 return $this->db->update('activity', $data);
 
         }
+    public function get_activityreport(){
+
+        $subcategories_list = $this -> db -> select('*') -> get('subcategories') -> result_array(); 
+ 
+                $activity=array();
+                // $activity[''] = 'Elija grupo...'; 
+                foreach($subcategories_list as $sl){
+                        $activity[$sl['subcategory']] = $this->activity_model->get_activity_WhereLike('activity_date',">01/12/2018"); 
+                       
+                
+                }
+ 
+       
+       $activity=$this->activity_model->get_activity();
+        
+        return $activity;
+
+
+    }
 }
